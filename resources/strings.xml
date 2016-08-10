@@ -1,0 +1,6 @@
+<resources>
+    <string id="AppName">Red Face</string>
+    <string id="second_title">Display second</string>
+    <string id="date_title">Display date</string>
+    <string id="altimeter_title">Display altimeter</string>
+</resources>
