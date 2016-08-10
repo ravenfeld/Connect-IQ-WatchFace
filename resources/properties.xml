@@ -1,0 +1,21 @@
+<resources>
+
+    <properties>
+        <property id="second" type="boolean">true</property>
+        <property id="date" type="boolean">true</property>
+        <property id="altimeter" type="boolean">true</property>
+    </properties>
+
+
+    <settings>
+        <setting propertyKey="@Properties.second" title="@Strings.second_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.date" title="@Strings.date_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.altimeter" title="@Strings.altimeter_title">
+            <settingConfig type="boolean" />
+        </setting>   
+    </settings>
+</resources>
