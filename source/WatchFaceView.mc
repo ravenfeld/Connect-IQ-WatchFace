@@ -58,10 +58,10 @@ class WatchFaceView extends Ui.WatchFace{
         
       
 		
-        start_x_active_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+text_width_second))/2;
-        start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second))/2;
-        start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute))/2;
-        start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute))/2;
+        start_x_active_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+text_width_second+8))/2;
+        start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
+        start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
+        start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
     }
     
     
@@ -149,16 +149,16 @@ class WatchFaceView extends Ui.WatchFace{
         dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         dc.drawText(start_x, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, hourString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
-        var start_point=start_x+text_width_hour;
+        var start_point=start_x+text_width_hour+2;
         dc.drawText(start_point, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, ":", Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         dc.setColor(color_user, Gfx.COLOR_TRANSPARENT);
-        var start_minute=start_point+text_width_point;
+        var start_minute=start_point+text_width_point+2;
         dc.drawText(start_minute, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, minuteString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         var display_second = App.getApp().getProperty("second");
         if(active && display_second){
-        	var start_second=start_minute+text_width_minute;
+        	var start_second=start_minute+text_width_minute+4;
         	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         	dc.drawText(start_second, cy-text_height_hour/2+text_height_second/2, Gfx.FONT_NUMBER_MEDIUM, secondString, Graphics.TEXT_JUSTIFY_VCENTER |Graphics.TEXT_JUSTIFY_LEFT);
 		}
