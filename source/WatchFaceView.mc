@@ -25,6 +25,8 @@ class WatchFaceView extends Ui.WatchFace{
 	var start_x_sleep_hour_10;
 	var start_x_sleep_hour_1;
 	var display_altimeter;
+	var color_text;
+	var color_user;
 	
 	function initialize() {
         WatchFace.initialize();
@@ -70,10 +72,11 @@ class WatchFaceView extends Ui.WatchFace{
     
     
     function onUpdate(dc) {
-    	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
+    	setBackgroundColor(dc);
+    	setColor();
         dc.clear();
 
-                var moment = Time.now();
+        var moment = Time.now();
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
 		drawHour(dc);
@@ -140,20 +143,20 @@ class WatchFaceView extends Ui.WatchFace{
         	}
         } 
                 
-        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         dc.drawText(start_x, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, hourString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         var start_point=start_x+text_width_hour;
         dc.drawText(start_point, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, ":", Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
-        dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(color_user, Gfx.COLOR_TRANSPARENT);
         var start_minute=start_point+text_width_point;
         dc.drawText(start_minute, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, minuteString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         var display_second = App.getApp().getProperty("second");
         if(active && display_second){
         	var start_second=start_minute+text_width_minute;
-        	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         	dc.drawText(start_second, cy-text_height_hour/2+text_height_second/2, Gfx.FONT_NUMBER_MEDIUM, secondString, Graphics.TEXT_JUSTIFY_VCENTER |Graphics.TEXT_JUSTIFY_LEFT);
 		}
     }
@@ -163,7 +166,7 @@ class WatchFaceView extends Ui.WatchFace{
     function drawDate(dc){
     	var text_hour_height = dc.getFontHeight(Gfx.FONT_NUMBER_THAI_HOT);
     	var dateString = Lang.format("$1$ $2$", [info.day_of_week, info.day]);
-    	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+    	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         dc.drawText(cx, cy-text_hour_height/2-30, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
     }
     
@@ -184,7 +187,7 @@ class WatchFaceView extends Ui.WatchFace{
 			altitudeStr = format("$1$ ft", [actaltitude.format("%d")]);
 		}
 		var text_width = dc.getTextWidthInPixels(altitudeStr,Gfx.FONT_MEDIUM);
-		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
 		dc.drawText(x + 105-text_width/2, y - 26/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
     }
     
@@ -192,12 +195,53 @@ class WatchFaceView extends Ui.WatchFace{
 		var y = 190;
 		var x = 40;
     
-        dc.setColor( Gfx.COLOR_DK_RED,Gfx.COLOR_TRANSPARENT);
+        dc.setColor( color_user,Gfx.COLOR_TRANSPARENT);
         dc.fillRectangle(0, y-23, dc.getWidth(), 26);
         var mountain_1 = [ [x,y], [x+23,y-40],[x+35,y-20], [x+21,y]  ];
         var mountain_2 = [ [x+24,y], [x+45,y-30], [x+65,y]  ];
-        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         dc.fillPolygon(mountain_1);
         dc.fillPolygon(mountain_2);
     }
+    
+    function setColor(){
+        var user_color =  App.getApp().getProperty("default_color");
+        if(user_color == 0){
+        	color_user = Gfx.COLOR_DK_RED;
+        }else if (user_color == 1) {
+        	color_user = Gfx.COLOR_BLUE;
+        }else if (user_color == 2) {
+        	color_user = Gfx.COLOR_DK_BLUE;
+        }else if (user_color == 3) {
+        	color_user = Gfx.COLOR_GREEN;
+        }else if (user_color == 4) {
+        	color_user = Gfx.COLOR_DK_GREEN;
+        }else if (user_color == 5) {
+        	color_user = Gfx.COLOR_LT_GRAY;
+        }else if (user_color == 6) {
+        	color_user = Gfx.COLOR_DK_GRAY;
+        }else if (user_color == 7) {
+        	color_user = Gfx.COLOR_ORANGE;
+        }else if (user_color == 8) {
+        	color_user = Gfx.COLOR_PINK;
+        }else if (user_color == 9) {
+        	color_user = Gfx.COLOR_PURPLE;
+        }else if (user_color == 10) {
+        	color_user = Gfx.COLOR_RED;
+        }else if (user_color == 11) {
+        	color_user = Gfx.COLOR_DK_RED;
+        }
+    }
+    
+    function setBackgroundColor(dc){
+        var user_color =  App.getApp().getProperty("bgk_color");
+        if(user_color == 0){
+        	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
+        	color_text = Gfx.COLOR_WHITE;
+        }else if (user_color == 1) {
+        	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
+        	color_text = Gfx.COLOR_BLACK;
+        }
+    }
+
 }

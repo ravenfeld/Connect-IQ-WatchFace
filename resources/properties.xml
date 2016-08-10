@@ -4,6 +4,8 @@
         <property id="second" type="boolean">true</property>
         <property id="date" type="boolean">true</property>
         <property id="altimeter" type="boolean">true</property>
+        <property id="bgk_color" type="number">0</property>
+        <property id="default_color" type="number">0</property>
     </properties>
 
 
@@ -16,6 +18,28 @@
         </setting>
         <setting propertyKey="@Properties.altimeter" title="@Strings.altimeter_title">
             <settingConfig type="boolean" />
-        </setting>   
+        </setting>
+        <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_black</listEntry>
+            	<listEntry value="1">@Strings.color_white</listEntry>
+            </settingConfig>
+        </setting> 
+        <setting propertyKey="@Properties.default_color" title="@Strings.color_title" prompt="@Strings.color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting>    
     </settings>
 </resources>

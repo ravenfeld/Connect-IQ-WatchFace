@@ -3,4 +3,20 @@
     <string id="second_title">Affichage des secondes</string>
     <string id="date_title">Affichage de la date</string>
     <string id="altimeter_title">Affichage de altitude</string>
+    <string id="color_title">Couleur</string>
+    <string id="bgk_color_title">Couleur du fond</string>
+	<string id="color_default">Défaut</string>
+    <string id="color_blue">Bleu</string>
+    <string id="color_blue_dark">Bleu foncé</string>
+    <string id="color_green">Vert</string>
+    <string id="color_green_dark">Vert foncé</string>
+    <string id="color_gray_little">Gris</string>
+    <string id="color_gray_dark">Gris foncé</string>
+    <string id="color_orange">Orange</string>
+    <string id="color_pink">Rose</string>
+    <string id="color_purple">Violet</string>
+    <string id="color_red">Rouge</string>
+    <string id="color_red_dark">Rouge foncé</string>
+    <string id="color_white">Blanc</string>
+    <string id="color_black">Noir</string>
 </strings>
