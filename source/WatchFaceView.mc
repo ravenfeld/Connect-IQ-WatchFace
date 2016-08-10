@@ -43,16 +43,10 @@ class WatchFaceView extends Ui.WatchFace{
     }
     
     function onLayout(dc) {
-    	display_altimeter = App.getApp().getProperty("altimeter");       
         settings = System.getDeviceSettings();
 
         cx = dc.getWidth() / 2;
         cy = dc.getHeight() / 2;
-        if(display_altimeter){
-        	text_y_hour = cy-12;
-        }else{
-        	text_y_hour = cy;
-        }
         
         text_width_hour_10 = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
         text_width_hour_1 = dc.getTextWidthInPixels("8",Gfx.FONT_NUMBER_THAI_HOT);
@@ -72,6 +66,9 @@ class WatchFaceView extends Ui.WatchFace{
     
     
     function onUpdate(dc) {
+    	display_altimeter = App.getApp().getProperty("altimeter");
+    	var display_date = App.getApp().getProperty("date");
+    	
     	setBackgroundColor(dc);
     	setColor();
         dc.clear();
@@ -80,7 +77,7 @@ class WatchFaceView extends Ui.WatchFace{
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
 		drawHour(dc);
-		var display_date = App.getApp().getProperty("date");
+		
 		if(display_date){
 			drawDate(dc);
 		}
@@ -123,6 +120,12 @@ class WatchFaceView extends Ui.WatchFace{
             hourString = Lang.format("0$1$", [hour]);   
         } else {
             hourString = Lang.format("$1$", [hour]);
+        }
+        
+        if(display_altimeter){
+        	text_y_hour = cy-12;
+        }else{
+        	text_y_hour = cy;
         }
         
         var text_width_hour;
