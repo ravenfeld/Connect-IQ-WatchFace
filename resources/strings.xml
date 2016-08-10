@@ -3,4 +3,20 @@
     <string id="second_title">Display second</string>
     <string id="date_title">Display date</string>
     <string id="altimeter_title">Display altimeter</string>
+    <string id="color_title">Color</string>
+    <string id="bgk_color_title">Background Color</string>
+    <string id="color_default">Default</string>
+    <string id="color_blue">Blue</string>
+    <string id="color_blue_dark">Blue dark</string>
+    <string id="color_green">Green</string>
+    <string id="color_green_dark">Green dark</string>
+    <string id="color_gray_little">Gray little</string>
+    <string id="color_gray_dark">Gray dark</string>
+    <string id="color_orange">Orange</string>
+    <string id="color_pink">Pink</string>
+    <string id="color_purple">Purple</string>
+    <string id="color_red">Red</string>
+    <string id="color_red_dark">Red dark</string>
+    <string id="color_white">White</string>
+    <string id="color_black">Black</string>
 </resources>

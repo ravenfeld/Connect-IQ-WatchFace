@@ -1,4 +1,5 @@
 using Toybox.Application as App;
+using Toybox.WatchUi as Ui;
 
 class WatchFaceApp extends App.AppBase
 {
@@ -16,4 +17,7 @@ class WatchFaceApp extends App.AppBase
         return [new WatchFaceView()];
     }
 
+    function onSettingsChanged(){
+        Ui.requestUpdate();
+    }
 }
