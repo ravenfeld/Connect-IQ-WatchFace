@@ -49,7 +49,8 @@
             <settingConfig type="list">
             	<listEntry value="0">@Strings.arc_type_battery</listEntry>
             	<listEntry value="1">@Strings.arc_type_step</listEntry>
-            	<listEntry value="2">@Strings.arc_type_none</listEntry>
+            	<listEntry value="2">@Strings.arc_type_activity</listEntry>
+            	<listEntry value="3">@Strings.arc_type_none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.arc_color" title="@Strings.arc_color_title" prompt="@Strings.arc_color_title">

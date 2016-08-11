@@ -24,6 +24,7 @@
     <string id="arc_width_title">Width arc</string>
     <string id="arc_type_battery">Battery</string>
 	<string id="arc_type_step">Step</string>
+	<string id="arc_type_activity">Level activity</string>
 	<string id="arc_type_none">None</string>
 	<string id="battery_low_title">Battery low</string>
 </resources>

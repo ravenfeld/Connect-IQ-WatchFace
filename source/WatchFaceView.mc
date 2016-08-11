@@ -252,7 +252,7 @@ class WatchFaceView extends Ui.WatchFace{
 
     function drawArc(dc){
         var arc_type =  App.getApp().getProperty("arc_type");
-        if(arc_type<2){
+        if(arc_type<3){
         	var arc_width =  App.getApp().getProperty("arc_width");
         	dc.setPenWidth(arc_width);
         	setColorArc(dc); 
@@ -260,6 +260,8 @@ class WatchFaceView extends Ui.WatchFace{
         		drawBattery(dc);
         	}else if (arc_type == 1) {
         		drawStep(dc);
+        	}else if (arc_type == 2) {
+        		drawActivity(dc);
         	}
         }
     }
@@ -282,7 +284,14 @@ class WatchFaceView extends Ui.WatchFace{
        		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_step.toLong()+90)%360);   
        	}
     }
-    
+
+    function drawActivity(dc){
+    	var percentage_activity = ActivityMonitor.getInfo().moveBarLevel*360/ActivityMonitor.MOVE_BAR_LEVEL_MAX;
+    	if(percentage_activity>0){
+       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_activity.toLong()+90)%360);   
+       	}
+    }
+        
     function setColorArc(dc){
         var user_color =  App.getApp().getProperty("arc_color");
         if(user_color == 0){

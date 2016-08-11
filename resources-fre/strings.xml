@@ -24,6 +24,7 @@
     <string id="arc_width_title">Épaisseur de l'arc</string>
     <string id="arc_type_battery">Batterie</string>
 	<string id="arc_type_step">Pas</string>
+	<string id="arc_type_activity">Niveau d'activité</string>
 	<string id="arc_type_none">Aucun</string>
 	<string id="battery_low_title">Batterie faible</string>
 </strings>
