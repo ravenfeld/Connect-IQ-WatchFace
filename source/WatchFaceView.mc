@@ -66,11 +66,11 @@ class WatchFaceView extends Ui.WatchFace{
     
     
     function onUpdate(dc) {
-    	display_altimeter = App.getApp().getProperty("altimeter");
-    	var display_date = App.getApp().getProperty("date");
+    	display_altimeter = App.getApp().getProperty("altimeter_display");
+    	var display_date = App.getApp().getProperty("date_display");
     	
     	setBackgroundColor(dc);
-    	setColor();
+    	setColorShade();
         dc.clear();
 
         var moment = Time.now();
@@ -87,8 +87,11 @@ class WatchFaceView extends Ui.WatchFace{
        		drawAlti(dc);
        	}
        
+       	drawArc(dc);  	
     }
     
+
+
     function drawHour(dc){
         
         var hour;
@@ -156,7 +159,7 @@ class WatchFaceView extends Ui.WatchFace{
         var start_minute=start_point+text_width_point+2;
         dc.drawText(start_minute, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, minuteString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
-        var display_second = App.getApp().getProperty("second");
+        var display_second = App.getApp().getProperty("second_display");
         if(active && display_second){
         	var start_second=start_minute+text_width_minute+4;
         	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
@@ -185,9 +188,9 @@ class WatchFaceView extends Ui.WatchFace{
 		}
 		var metric = Sys.getDeviceSettings().elevationUnits;
 		if (metric==Sys.UNIT_METRIC) {
-			altitudeStr = format("$1$ m", [actaltitude.format("%d")]);
+			altitudeStr = format("$1$m", [actaltitude.format("%d")]);
 		} else {
-			altitudeStr = format("$1$ ft", [actaltitude.format("%d")]);
+			altitudeStr = format("$1$ft", [actaltitude.format("%d")]);
 		}
 		var text_width = dc.getTextWidthInPixels(altitudeStr,Gfx.FONT_MEDIUM);
 		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
@@ -207,8 +210,8 @@ class WatchFaceView extends Ui.WatchFace{
         dc.fillPolygon(mountain_2);
     }
     
-    function setColor(){
-        var user_color =  App.getApp().getProperty("default_color");
+    function setColorShade(){
+        var user_color =  App.getApp().getProperty("shade_color");
         if(user_color == 0){
         	color_user = Gfx.COLOR_DK_RED;
         }else if (user_color == 1) {
@@ -237,14 +240,75 @@ class WatchFaceView extends Ui.WatchFace{
     }
     
     function setBackgroundColor(dc){
-        var user_color =  App.getApp().getProperty("bgk_color");
-        if(user_color == 0){
+        var bgk_color =  App.getApp().getProperty("bgk_color");
+        if(bgk_color == 0){
         	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
         	color_text = Gfx.COLOR_WHITE;
-        }else if (user_color == 1) {
+        }else if (bgk_color == 1) {
         	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
         	color_text = Gfx.COLOR_BLACK;
         }
     }
 
+    function drawArc(dc){
+        var arc_type =  App.getApp().getProperty("arc_type");
+        if(arc_type<2){
+        	var arc_width =  App.getApp().getProperty("arc_width");
+        	dc.setPenWidth(arc_width);
+        	setColorArc(dc); 
+        	if(arc_type == 0){
+        		drawBattery(dc);
+        	}else if (arc_type == 1) {
+        		drawStep(dc);
+        	}
+        }
+    }
+    
+    function drawBattery(dc){
+    	var battery = Sys.getSystemStats().battery;
+    	var battery_low =  App.getApp().getProperty("battery_low");
+    	if(battery<=battery_low){
+    		dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+    	}
+       	var percentage_battery = battery*360/100;
+       	if(percentage_battery>0){
+       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_battery.toLong()+90)%360); 
+       	}
+    }
+    
+    function drawStep(dc){
+    	var percentage_step = ActivityMonitor.getInfo().steps*360/ActivityMonitor.getInfo().stepGoal;
+    	if(percentage_step>0){
+       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_step.toLong()+90)%360);   
+       	}
+    }
+    
+    function setColorArc(dc){
+        var user_color =  App.getApp().getProperty("arc_color");
+        if(user_color == 0){
+        	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 1) {
+        	dc.setColor(Gfx.COLOR_BLUE, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 2) {
+        	dc.setColor(Gfx.COLOR_DK_BLUE, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 3) {
+        	dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 4) {
+        	dc.setColor(Gfx.COLOR_DK_GREEN, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 5) {
+        	dc.setColor(Gfx.COLOR_LT_GRAY, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 6) {
+        	dc.setColor(Gfx.COLOR_DK_GRAY, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 7) {
+        	dc.setColor(Gfx.COLOR_ORANGE, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 8) {
+        	dc.setColor(Gfx.COLOR_PINK, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 9) {
+        	dc.setColor(Gfx.COLOR_PURPLE, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 10) {
+        	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+        }else if (user_color == 11) {
+        	dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
+        }
+    }
 }
