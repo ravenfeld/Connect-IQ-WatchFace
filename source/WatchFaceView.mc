@@ -341,14 +341,14 @@ class WatchFaceView extends Ui.WatchFace{
     
     function drawBattery(dc){
     	var battery = System.getSystemStats().battery;
-    	var width=42;
-    	var height=23;
+    	var width=35;
+    	var height=19;
     	var xStart= cx-width/2;
     	var yStart = cy-text_height_hour/2-30;
-    	
+    	dc.setPenWidth(1);
     	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
     	dc.drawRectangle(xStart, yStart, width, height);
-        dc.fillRectangle(xStart + width - 1, yStart + 6, 4, height - 12);   
+        dc.fillRectangle(xStart + width - 1, yStart + 6, 3, height - 12);   
        
         var battery_low =  App.getApp().getProperty("battery_low");
     	if(battery<=battery_low){
@@ -358,7 +358,7 @@ class WatchFaceView extends Ui.WatchFace{
         var display_perrcentage = App.getApp().getProperty("battery_percentage");
         
         if(display_perrcentage){
-            dc.drawText(xStart+width/2 , yStart, Graphics.FONT_TINY, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(xStart+width/2 , yStart, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
         }else{
         	dc.fillRectangle(xStart + 1, yStart + 1, (width-2) * battery / 100, height - 2);
         }
