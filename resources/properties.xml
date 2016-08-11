@@ -2,7 +2,7 @@
 
     <properties>
         <property id="second_display" type="boolean">true</property>
-        <property id="date_display" type="boolean">true</property>
+        <property id="info_top" type="number">0</property>
         <property id="date_type" type="number">0</property>
         <property id="altimeter_display" type="boolean">true</property>
         <property id="bgk_color" type="number">0</property>
@@ -11,6 +11,7 @@
         <property id="arc_color" type="number">0</property>
         <property id="arc_width" type="number">4</property>
         <property id="battery_low" type="number">15</property>
+        <property id="battery_percentage" type="boolean">false</property>
     </properties>
 
 
@@ -18,8 +19,12 @@
         <setting propertyKey="@Properties.second_display" title="@Strings.second_display_title">
             <settingConfig type="boolean" />
         </setting>
-        <setting propertyKey="@Properties.date_display" title="@Strings.date_display_title">
-            <settingConfig type="boolean" />
+        <setting propertyKey="@Properties.info_top" title="@Strings.info_top_title" prompt="@Strings.info_top_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.date</listEntry>
+            	<listEntry value="1">@Strings.battery</listEntry>
+            	<listEntry value="2">@Strings.none</listEntry>
+            </settingConfig>
         </setting>
         <setting propertyKey="@Properties.date_type" title="@Strings.date_type_title">
             <settingConfig type="list">
@@ -57,7 +62,7 @@
             	<listEntry value="0">@Strings.arc_type_battery</listEntry>
             	<listEntry value="1">@Strings.arc_type_step</listEntry>
             	<listEntry value="2">@Strings.arc_type_activity</listEntry>
-            	<listEntry value="3">@Strings.arc_type_none</listEntry>
+            	<listEntry value="3">@Strings.none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.arc_color" title="@Strings.arc_color_title" prompt="@Strings.arc_color_title">
@@ -81,6 +86,16 @@
         </setting>       
          <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
             <settingConfig type="numeric" min="0" max="100" />
-        </setting>      
+        </setting>
+        
+
+
+
+    
+        <setting propertyKey="@Properties.battery_percentage" title="@Strings.battery_percentage_title">
+            <settingConfig type="boolean" />
+        </setting> 
+    
+          
     </settings>
 </resources>

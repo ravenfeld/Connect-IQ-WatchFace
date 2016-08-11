@@ -1,7 +1,9 @@
 <resources>
     <string id="AppName">Red Face</string>
     <string id="second_display_title">Display second</string>
-    <string id="date_display_title">Display date</string>
+    <string id="info_top_title">Info top</string>
+    <string id="battery">Battery</string>
+    <string id="date">Date</string>
     <string id="altimeter_display_title">Display altimeter</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
@@ -25,9 +27,10 @@
     <string id="arc_type_battery">Battery</string>
 	<string id="arc_type_step">Step</string>
 	<string id="arc_type_activity">Level activity</string>
-	<string id="arc_type_none">None</string>
+	<string id="none">None</string>
 	<string id="battery_low_title">Battery low</string>
 	<string id="date_type_title">Format date</string>
 	<string id="date_type_day">EE d</string>
 	<string id="date_type_day_month">EE d MM</string>
+	<string id="battery_percentage_title">Display percentage battery</string>
 </resources>
