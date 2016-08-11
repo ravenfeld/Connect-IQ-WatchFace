@@ -27,6 +27,7 @@ class WatchFaceView extends Ui.WatchFace{
 	var display_altimeter;
 	var color_text;
 	var color_user;
+	var arc_type;
 	
 	function initialize() {
         WatchFace.initialize();
@@ -68,6 +69,7 @@ class WatchFaceView extends Ui.WatchFace{
     function onUpdate(dc) {
     	display_altimeter = App.getApp().getProperty("altimeter_display");
     	var display_date = App.getApp().getProperty("date_display");
+    	arc_type =  App.getApp().getProperty("arc_type");
     	
     	setBackgroundColor(dc);
     	setColorShade();
@@ -179,7 +181,12 @@ class WatchFaceView extends Ui.WatchFace{
     function drawAlti(dc){
         var actaltitude = 4000;
 		var altitudeStr;
-		var y = 190;
+		var y;
+		if(arc_type==3){
+			y = 192;
+		}else{
+			y = 185;
+		}
 		var x = 40;
     
         var actInfo = Act.getActivityInfo();
@@ -194,11 +201,16 @@ class WatchFaceView extends Ui.WatchFace{
 		}
 		var text_width = dc.getTextWidthInPixels(altitudeStr,Gfx.FONT_MEDIUM);
 		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-		dc.drawText(x + 105-text_width/2, y - 26/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
+		dc.drawText(x + 105-text_width/2, y - 24/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
     }
     
     function drawMountain(dc){
-		var y = 190;
+		var y;
+		if(arc_type==3){
+			y = 192;
+		}else{
+			y = 185;
+		}
 		var x = 40;
     
         dc.setColor( color_user,Gfx.COLOR_TRANSPARENT);
@@ -251,7 +263,6 @@ class WatchFaceView extends Ui.WatchFace{
     }
 
     function drawArc(dc){
-        var arc_type =  App.getApp().getProperty("arc_type");
         if(arc_type<3){
         	var arc_width =  App.getApp().getProperty("arc_width");
         	dc.setPenWidth(arc_width);
