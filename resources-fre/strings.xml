@@ -1,9 +1,9 @@
 <strings>
     <string id="AppName">Red Face</string>
-    <string id="second_title">Affichage des secondes</string>
-    <string id="date_title">Affichage de la date</string>
-    <string id="altimeter_title">Affichage de altitude</string>
-    <string id="color_title">Couleur de la nuance</string>
+    <string id="second_display_title">Affichage des secondes</string>
+    <string id="date_display_title">Affichage de la date</string>
+    <string id="altimeter_display_title">Affichage de altitude</string>
+    <string id="shade_color_title">Couleur de la nuance</string>
     <string id="bgk_color_title">Couleur d'arrière plan</string>
 	<string id="color_default">Défaut</string>
     <string id="color_blue">Bleu</string>
@@ -19,4 +19,11 @@
     <string id="color_red_dark">Rouge foncé</string>
     <string id="color_white">Blanc</string>
     <string id="color_black">Noir</string>
+    <string id="arc_type_title">Type arc</string>
+    <string id="arc_color_title">Couleur de l'arc</string>
+    <string id="arc_width_title">Épaisseur de l'arc</string>
+    <string id="arc_type_battery">Batterie</string>
+	<string id="arc_type_step">Pas</string>
+	<string id="arc_type_none">Aucun</string>
+	<string id="battery_low_title">Batterie faible</string>
 </strings>

@@ -1,10 +1,10 @@
 <resources>
     <string id="AppName">Red Face</string>
-    <string id="second_title">Display second</string>
-    <string id="date_title">Display date</string>
-    <string id="altimeter_title">Display altimeter</string>
-    <string id="color_title">Color</string>
-    <string id="bgk_color_title">Background Color</string>
+    <string id="second_display_title">Display second</string>
+    <string id="date_display_title">Display date</string>
+    <string id="altimeter_display_title">Display altimeter</string>
+    <string id="shade_color_title">Shade color</string>
+    <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>
     <string id="color_blue">Blue</string>
     <string id="color_blue_dark">Blue dark</string>
@@ -19,4 +19,11 @@
     <string id="color_red_dark">Red dark</string>
     <string id="color_white">White</string>
     <string id="color_black">Black</string>
+    <string id="arc_type_title">Type arc</string>
+    <string id="arc_color_title">Color arc</string>
+    <string id="arc_width_title">Width arc</string>
+    <string id="arc_type_battery">Battery</string>
+	<string id="arc_type_step">Step</string>
+	<string id="arc_type_none">None</string>
+	<string id="battery_low_title">Battery low</string>
 </resources>

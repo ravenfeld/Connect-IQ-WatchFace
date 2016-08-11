@@ -1,22 +1,26 @@
 <resources>
 
     <properties>
-        <property id="second" type="boolean">true</property>
-        <property id="date" type="boolean">true</property>
-        <property id="altimeter" type="boolean">true</property>
+        <property id="second_display" type="boolean">true</property>
+        <property id="date_display" type="boolean">true</property>
+        <property id="altimeter_display" type="boolean">true</property>
         <property id="bgk_color" type="number">0</property>
-        <property id="default_color" type="number">0</property>
+        <property id="shade_color" type="number">0</property>
+        <property id="arc_type" type="number">0</property>
+        <property id="arc_color" type="number">0</property>
+        <property id="arc_width" type="number">4</property>
+        <property id="battery_low" type="number">15</property>
     </properties>
 
 
     <settings>
-        <setting propertyKey="@Properties.second" title="@Strings.second_title">
+        <setting propertyKey="@Properties.second_display" title="@Strings.second_display_title">
             <settingConfig type="boolean" />
         </setting>
-        <setting propertyKey="@Properties.date" title="@Strings.date_title">
+        <setting propertyKey="@Properties.date_display" title="@Strings.date_display_title">
             <settingConfig type="boolean" />
         </setting>
-        <setting propertyKey="@Properties.altimeter" title="@Strings.altimeter_title">
+        <setting propertyKey="@Properties.altimeter_display" title="@Strings.altimeter_display_title">
             <settingConfig type="boolean" />
         </setting>
         <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
@@ -25,7 +29,7 @@
             	<listEntry value="1">@Strings.color_white</listEntry>
             </settingConfig>
         </setting> 
-        <setting propertyKey="@Properties.default_color" title="@Strings.color_title" prompt="@Strings.color_title">
+        <setting propertyKey="@Properties.shade_color" title="@Strings.shade_color_title" prompt="@Strings.shade_color_title">
             <settingConfig type="list" >
             	<listEntry value="0">@Strings.color_default</listEntry>
             	<listEntry value="1">@Strings.color_blue</listEntry>
@@ -40,6 +44,35 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             </settingConfig>
-        </setting>    
+        </setting>
+        <setting propertyKey="@Properties.arc_type" title="@Strings.arc_type_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.arc_type_battery</listEntry>
+            	<listEntry value="1">@Strings.arc_type_step</listEntry>
+            	<listEntry value="2">@Strings.arc_type_none</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.arc_color" title="@Strings.arc_color_title" prompt="@Strings.arc_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting>
+                <setting propertyKey="@Properties.arc_width" title="@Strings.arc_width_title" prompt="@Strings.arc_width_title">
+            <settingConfig type="numeric" min="2" max="10" />
+        </setting>       
+         <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
+            <settingConfig type="numeric" min="0" max="100" />
+        </setting>      
     </settings>
 </resources>
