@@ -345,7 +345,7 @@ class WatchFaceView extends Ui.WatchFace{
     	var height=23;
     	var xStart= cx-width/2;
     	var yStart = cy-text_height_hour/2-30;
-    	
+    	dc.setPenWidth(1);
     	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
     	dc.drawRectangle(xStart, yStart, width, height);
         dc.fillRectangle(xStart + width - 1, yStart + 6, 4, height - 12);   
