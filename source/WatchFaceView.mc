@@ -173,7 +173,13 @@ class WatchFaceView extends Ui.WatchFace{
     
     function drawDate(dc){
     	var text_hour_height = dc.getFontHeight(Gfx.FONT_NUMBER_THAI_HOT);
-    	var dateString = Lang.format("$1$ $2$", [info.day_of_week.substring(0,3), info.day]);
+    	var dateString;
+    	var date_type =  App.getApp().getProperty("date_type");
+    	if(date_type == 0){
+    		dateString = Lang.format("$1$ $2$", [info.day_of_week.substring(0,3), info.day]);
+    	}else{
+    		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
+    	}
     	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
         dc.drawText(cx, cy-text_hour_height/2-30, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
     }

@@ -27,4 +27,7 @@
 	<string id="arc_type_activity">Niveau d'activité</string>
 	<string id="arc_type_none">Aucun</string>
 	<string id="battery_low_title">Batterie faible</string>
+	<string id="date_type_title">Formattage de la date</string>
+	<string id="date_type_day">EE d</string>
+	<string id="date_type_day_month">EE d MM</string>
 </strings>
