@@ -36,9 +36,9 @@ module Battery{
     	if(battery<=battery_low){
     		dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
     	}
-       	var percentage_battery = battery*360/100;
-       	if(percentage_battery>0){
-       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_battery.toLong()+90)%360); 
+       	var angle_battery = battery*360/100;
+       	if(angle_battery>0){
+       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-angle_battery.toLong()+90)%360); 
        	}
     }
 }
