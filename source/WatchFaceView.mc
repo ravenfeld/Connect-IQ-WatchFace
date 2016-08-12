@@ -89,7 +89,6 @@ class WatchFaceView extends Ui.WatchFace{
 		}else if( info_top == 1){
 			y = cy-text_height_hour/2-15;
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);
-			
 		}else if (info_top == 2 && settings.phoneConnected){
 			y = cy-text_height_hour/2-15;
 			PhoneConnected.drawIcon(dc,cx,y,text_color);
@@ -121,7 +120,7 @@ class WatchFaceView extends Ui.WatchFace{
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
-        		drawArcStep(dc);
+        		Step.drawArc(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
         	}else if (arc_type == 2) {
         		drawArcActivity(dc);
         	} 	
@@ -192,15 +191,6 @@ class WatchFaceView extends Ui.WatchFace{
         	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
         	text_color = Gfx.COLOR_BLACK;
         }
-    }
-
-    
-    
-    function drawArcStep(dc){
-    	var percentage_step = ActivityMonitor.getInfo().steps*360/ActivityMonitor.getInfo().stepGoal;
-    	if(percentage_step>0){
-       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_step.toLong()+90)%360);   
-       	}
     }
 
     function drawArcActivity(dc){
