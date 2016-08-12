@@ -9,7 +9,6 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var cx;
     hidden var cy;
     hidden var settings;
-    hidden var info;
     hidden var active;
     hidden var text_width_hour_10;
     hidden var text_width_hour_1;
@@ -67,6 +66,7 @@ class WatchFaceView extends Ui.WatchFace{
     	var info_top = App.getApp().getProperty("info_top");
     	var info_bottom = App.getApp().getProperty("info_bottom");
     	var display_second = App.getApp().getProperty("second_display");
+    	var date_type =  App.getApp().getProperty("date_type");
     	
     	var battery = Sys.getSystemStats().battery;
     	var battery_low =  App.getApp().getProperty("battery_low");
@@ -78,14 +78,14 @@ class WatchFaceView extends Ui.WatchFace{
         dc.clear();
 
         var moment = Time.now();
-        info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
+        var info_date = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
-        drawHour(dc,shade_color,info_bottom,active&&display_second);
+        drawHour(dc,info_date,shade_color,info_bottom,active&&display_second);
     
 		var y;
 		if(info_top == 0){
 			y = cy-text_height_hour/2-27;
-			drawDate(dc,y);
+			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
 		}else if( info_top == 1){
 			y = cy-text_height_hour/2-15;
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);
@@ -106,7 +106,7 @@ class WatchFaceView extends Ui.WatchFace{
        		Altimeter.draw(dc,x,y,text_color,text_color,shade_color);	
 		}else if( info_bottom == 1){
 			y = cy+text_height_hour/2;
-			drawDate(dc,y);
+			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
 		}else if(info_bottom ==2){
 			y = cy+text_height_hour/2+20;
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);	
@@ -118,7 +118,6 @@ class WatchFaceView extends Ui.WatchFace{
 		if(arc_type<3){
        		var arc_width =  App.getApp().getProperty("arc_width");
       
-      
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
@@ -128,20 +127,8 @@ class WatchFaceView extends Ui.WatchFace{
         	} 	
        	}
     }
-        
-    function drawDate(dc,y){
-    	var dateString;
-    	var date_type =  App.getApp().getProperty("date_type");
-    	if(date_type == 0){
-    		dateString = Lang.format("$1$ $2$", [info.day_of_week.substring(0,3), info.day]);
-    	}else{
-    		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
-    	}
-    	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
-    }
-    
-    function drawHour(dc,shade_color,info_bottom,display_second){
+            
+    function drawHour(dc,info_date,shade_color,info_bottom,display_second){
         var text_y_hour;
         if(info_bottom==0){
         	text_y_hour = cy-12;
@@ -150,7 +137,7 @@ class WatchFaceView extends Ui.WatchFace{
         }
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || (info.hour-12)>=10){
+        if(settings.is24Hour || (info_date.hour-12)>=10){
         	text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;
@@ -165,7 +152,7 @@ class WatchFaceView extends Ui.WatchFace{
         		start_x=start_x_sleep_hour_1;
         	}
         }
-		Date.drawHour(dc,info,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
+		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
     }
     
     function getColorShade(){

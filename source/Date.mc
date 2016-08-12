@@ -51,4 +51,16 @@ module Date{
         	dc.drawText(start_second, cy-text_height[0]/2+text_height[1]/2+12, Gfx.FONT_NUMBER_MEDIUM, secondString, Gfx.TEXT_JUSTIFY_VCENTER |Gfx.TEXT_JUSTIFY_LEFT);
 		}
 	}
+	
+	function drawDate(dc,date,cx,y,text_color,date_type){
+    	var dateString;
+    	
+    	if(date_type == 0){
+    		dateString = Lang.format("$1$ $2$", [date.day_of_week.substring(0,3), date.day]);
+    	}else{
+    		dateString = Lang.format("$1$ $2$ $3$", [date.day_of_week.substring(0,3), date.day, date.month.substring(0,3)]);
+    	}
+    	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Gfx.TEXT_JUSTIFY_CENTER);
+    }
 }
