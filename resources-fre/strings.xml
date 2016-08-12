@@ -2,10 +2,11 @@
     <string id="AppName">Mountain Face</string>
     <string id="second_display_title">Affichage des secondes</string>
     <string id="info_top_title">Info en haut</string>
+    <string id="info_bottom_title">Info en bas</string>
     <string id="battery">Batterie</string>
     <string id="date">Date</string>
     <string id="phone_connected">Phone connected</string>
-    <string id="altimeter_display_title">Affichage de altitude</string>
+    <string id="altimeter">Altitude</string>
     <string id="shade_color_title">Couleur de la nuance</string>
     <string id="bgk_color_title">Couleur d'arrière plan</string>
 	<string id="color_default">Défaut</string>

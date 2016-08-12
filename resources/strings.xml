@@ -2,10 +2,11 @@
     <string id="AppName">Mountain Face</string>
     <string id="second_display_title">Display second</string>
     <string id="info_top_title">Info top</string>
+    <string id="info_bottom_title">Info bottom</string>
     <string id="battery">Battery</string>
     <string id="date">Date</string>
     <string id="phone_connected">Phone connected</string>
-    <string id="altimeter_display_title">Display altimeter</string>
+    <string id="altimeter">Altimeter</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>

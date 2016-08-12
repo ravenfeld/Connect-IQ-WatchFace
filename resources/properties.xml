@@ -3,8 +3,8 @@
     <properties>
         <property id="second_display" type="boolean">true</property>
         <property id="info_top" type="number">0</property>
+        <property id="info_bottom" type="number">0</property>
         <property id="date_type" type="number">0</property>
-        <property id="altimeter_display" type="boolean">true</property>
         <property id="bgk_color" type="number">0</property>
         <property id="shade_color" type="number">0</property>
         <property id="arc_type" type="number">0</property>
@@ -27,14 +27,20 @@
             	<listEntry value="3">@Strings.none</listEntry>
             </settingConfig>
         </setting>
+        <setting propertyKey="@Properties.info_bottom" title="@Strings.info_bottom_title" prompt="@Strings.info_bottom_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.altimeter</listEntry>
+            	<listEntry value="1">@Strings.date</listEntry>
+            	<listEntry value="2">@Strings.battery</listEntry>
+            	<listEntry value="3">@Strings.phone_connected</listEntry>
+            	<listEntry value="4">@Strings.none</listEntry>
+            </settingConfig>
+        </setting>
         <setting propertyKey="@Properties.date_type" title="@Strings.date_type_title">
             <settingConfig type="list">
             	<listEntry value="0">@Strings.date_type_day</listEntry>
             	<listEntry value="1">@Strings.date_type_day_month</listEntry>
             </settingConfig>
-        </setting>
-        <setting propertyKey="@Properties.altimeter_display" title="@Strings.altimeter_display_title">
-            <settingConfig type="boolean" />
         </setting>
         <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
             <settingConfig type="list" >

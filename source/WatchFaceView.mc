@@ -63,10 +63,10 @@ class WatchFaceView extends Ui.WatchFace{
         start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
     }
     
-    //faire des fichiers modules pour chaque dessin, a réfléchir
     function onUpdate(dc) {
-    	var display_altimeter = App.getApp().getProperty("altimeter_display");
     	var arc_type =  App.getApp().getProperty("arc_type");
+    	var info_top = App.getApp().getProperty("info_top");
+    	var info_bottom = App.getApp().getProperty("info_bottom");
     	
     	setBackgroundColor(dc);
     	setColorShade();
@@ -75,13 +75,11 @@ class WatchFaceView extends Ui.WatchFace{
         var moment = Time.now();
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
-		drawHour(dc,display_altimeter);
+		drawHour(dc,info_bottom==0);
 		
-		var info_top = App.getApp().getProperty("info_top");
-		//faire variable pour proposer date et battery en bas du telephone
 		var y;
 		if(info_top == 0){
-			y = cy-text_height_hour/2-30;
+			y = cy-text_height_hour/2-27;
 			drawDate(dc,y);
 		}else if( info_top == 1){
 			y = cy-text_height_hour/2-15;
@@ -91,12 +89,23 @@ class WatchFaceView extends Ui.WatchFace{
 			drawPhoneConnected(dc,y);
 		}
 		
-		if(display_altimeter){
-			drawMountain(dc,arc_type);
-       		drawAlti(dc,arc_type);
+		
+		if(info_bottom == 0){
+       		drawAlti(dc,arc_type);	
+		}else if( info_bottom == 1){
+			y = cy+text_height_hour/2;
+			drawDate(dc,y);
+		}else if(info_bottom ==2){
+			y = cy+text_height_hour/2+20;
+			drawBattery(dc,y);	
+		}else if (info_bottom == 3 && settings.phoneConnected){
+			y = cy+text_height_hour/2+20;
+			drawPhoneConnected(dc,y);
+		}
+		
+		if(arc_type<3){
+       		drawArc(dc,arc_type);  	
        	}
-       
-       	drawArc(dc,arc_type);  	
     }
     
 
@@ -191,7 +200,8 @@ class WatchFaceView extends Ui.WatchFace{
     }
     
     function drawAlti(dc,arc_type){
-        var actaltitude = 4000;
+    	
+        var actaltitude = 0;
 		var altitudeStr;
 		var y;
 		if(arc_type==3){
@@ -201,6 +211,8 @@ class WatchFaceView extends Ui.WatchFace{
 		}
 		var x = 40;
     
+    	drawMountain(dc,x,y);
+    	
         var actInfo = Act.getActivityInfo();
 		if (actInfo != null && actInfo.altitude != null) {
 			actaltitude = actInfo.altitude;				
@@ -216,14 +228,7 @@ class WatchFaceView extends Ui.WatchFace{
 		dc.drawText(x + 105-text_width/2, y - 24/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
     }
     
-    function drawMountain(dc,arc_type){
-		var y;
-		if(arc_type==3){
-			y = 192;
-		}else{
-			y = 185;
-		}
-		var x = 40;
+    function drawMountain(dc,x,y){
     
         dc.setColor( color_user,Gfx.COLOR_TRANSPARENT);
         dc.fillRectangle(0, y-23, dc.getWidth(), 26);
@@ -275,17 +280,15 @@ class WatchFaceView extends Ui.WatchFace{
     }
 
     function drawArc(dc,arc_type){
-        if(arc_type<3){
-        	var arc_width =  App.getApp().getProperty("arc_width");
-        	dc.setPenWidth(arc_width);
+       	var arc_width =  App.getApp().getProperty("arc_width");
+       	dc.setPenWidth(arc_width);
         	setColorArc(dc); 
-        	if(arc_type == 0){
-        		drawArcBattery(dc);
-        	}else if (arc_type == 1) {
-        		drawArcStep(dc);
-        	}else if (arc_type == 2) {
-        		drawArcActivity(dc);
-        	}
+       	if(arc_type == 0){
+       		drawArcBattery(dc);
+       	}else if (arc_type == 1) {
+        	drawArcStep(dc);
+        }else if (arc_type == 2) {
+        	drawArcActivity(dc);
         }
     }
     
