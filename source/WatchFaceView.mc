@@ -92,7 +92,7 @@ class WatchFaceView extends Ui.WatchFace{
 			
 		}else if (info_top == 2 && settings.phoneConnected){
 			y = cy-text_height_hour/2-15;
-			drawPhoneConnected(dc,y);
+			PhoneConnected.drawIcon(dc,cx,y,text_color);
 		}
 		
 		
@@ -112,7 +112,7 @@ class WatchFaceView extends Ui.WatchFace{
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);	
 		}else if (info_bottom == 3 && settings.phoneConnected){
 			y = cy+text_height_hour/2+20;
-			drawPhoneConnected(dc,y);
+			PhoneConnected.drawIcon(dc,cx,y,text_color);
 		}
 		
 		if(arc_type<3){
@@ -237,20 +237,5 @@ class WatchFaceView extends Ui.WatchFace{
         }
         return text_color;
     }
-        
-    function drawPhoneConnected(dc,y){
-		var x = cx;
-		var size = 6;
-		var width = 2 ;
-
-		dc.setPenWidth(2);
-		dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
-
-    	dc.fillPolygon([[x-size,y-size], [x-size+width,y-size-width],[x+size+width,y+size-width],[x+size,y+size]]);
-		dc.fillPolygon([[x+size,y+size],[x+size-width,y+size-width],[x-width+1,y+size*2-width],[x,y+size*2]]);
-		dc.fillPolygon([[x+2,y+size*2-2],[x+2-width-1,y+size*2+width-2],[x+2-width-1,y-size*2-width+2],[x+2,y-size*2+2]]);
-		dc.fillPolygon([[x,y-size*2],[x-width+1,y-size*2+width],[x+size-width,y-size+width],[x+size,y-size]]);
-		dc.fillPolygon([[x+size,y-size],[x+size+width,y-size+width],[x-size+width,y+size+width],[x-size,y+size]]);
-
-	}
+   
 }
