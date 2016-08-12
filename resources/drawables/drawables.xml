@@ -1,3 +1,5 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="CalorieIconWhite" filename="calorie_icon_white.png" />
+    <bitmap id="CalorieIconBlack" filename="calorie_icon_black.png" />
 </drawables>

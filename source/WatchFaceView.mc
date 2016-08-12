@@ -23,7 +23,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var start_x_sleep_hour_10;
 	hidden var start_x_sleep_hour_1;
 	hidden var text_color;
-	
+	hidden var calorie_icon_white;
+	hidden var calorie_icon_black;
 	
 	function initialize() {
         WatchFace.initialize();
@@ -57,6 +58,9 @@ class WatchFaceView extends Ui.WatchFace{
         start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
         start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
+    
+    	calorie_icon_white = Ui.loadResource(Rez.Drawables.CalorieIconWhite);
+    	calorie_icon_black = Ui.loadResource(Rez.Drawables.CalorieIconBlack);
     }
     
     function onUpdate(dc) {
@@ -71,7 +75,15 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	var battery_percentage = App.getApp().getProperty("battery_percentage");
     	
-    	setBackgroundColor(dc);
+    	var bgk_color = getBackgroundColor(dc);
+    	dc.setColor(bgk_color,bgk_color);
+    	
+    	if(bgk_color==Gfx.COLOR_BLACK){
+    		text_color=Gfx.COLOR_WHITE;
+    	}else{
+    		text_color=Gfx.COLOR_BLACK;
+    	}
+    	
     	var shade_color = getColorShade();
         dc.clear();
 
@@ -90,6 +102,15 @@ class WatchFaceView extends Ui.WatchFace{
 		}else if (info_top == 2 && settings.phoneConnected){
 			y = cy-text_height_hour/2-15;
 			PhoneConnected.drawIcon(dc,cx,y,text_color);
+		}else if(info_top == 3){
+			y = cy-text_height_hour/2-15;
+			var calorie_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				calorie_icon = calorie_icon_white;
+			}else{
+				calorie_icon = calorie_icon_black;
+			}
+			InfoMonitor.drawCalorie(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}
 		
 		
@@ -110,6 +131,15 @@ class WatchFaceView extends Ui.WatchFace{
 		}else if (info_bottom == 3 && settings.phoneConnected){
 			y = cy+text_height_hour/2+20;
 			PhoneConnected.drawIcon(dc,cx,y,text_color);
+		}else if(info_bottom == 4){
+			y = cy+text_height_hour/2+20;
+			var calorie_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				calorie_icon = calorie_icon_white;
+			}else{
+				calorie_icon = calorie_icon_black;
+			}
+			InfoMonitor.drawCalorie(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}
 		
 		if(arc_type<3){
@@ -118,9 +148,9 @@ class WatchFaceView extends Ui.WatchFace{
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
-        		Step.drawArc(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
+        		InfoMonitor.drawArcStep(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
         	}else if (arc_type == 2) {
-        		MoveBar.drawArc(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
+        		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
        	}
     }
