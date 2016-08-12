@@ -24,10 +24,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var start_x_active_hour_1;
 	hidden var start_x_sleep_hour_10;
 	hidden var start_x_sleep_hour_1;
-	hidden var display_altimeter;
 	hidden var color_text;
 	hidden var color_user;
-	hidden var arc_type;
 	
 	function initialize() {
         WatchFace.initialize();
@@ -65,10 +63,10 @@ class WatchFaceView extends Ui.WatchFace{
         start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
     }
     
-    
+    //faire des fichiers modules pour chaque dessin, a réfléchir
     function onUpdate(dc) {
-    	display_altimeter = App.getApp().getProperty("altimeter_display");
-    	arc_type =  App.getApp().getProperty("arc_type");
+    	var display_altimeter = App.getApp().getProperty("altimeter_display");
+    	var arc_type =  App.getApp().getProperty("arc_type");
     	
     	setBackgroundColor(dc);
     	setColorShade();
@@ -77,26 +75,33 @@ class WatchFaceView extends Ui.WatchFace{
         var moment = Time.now();
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
-		drawHour(dc);
+		drawHour(dc,display_altimeter);
 		
 		var info_top = App.getApp().getProperty("info_top");
+		//faire variable pour proposer date et battery en bas du telephone
+		var y;
 		if(info_top == 0){
-			drawDate(dc);
+			y = cy-text_height_hour/2-30;
+			drawDate(dc,y);
 		}else if( info_top == 1){
-			drawBattery(dc);
+			y = cy-text_height_hour/2-15;
+			drawBattery(dc,y);
+		}else if (info_top == 2 && settings.phoneConnected){
+			y = cy-text_height_hour/2-15;
+			drawPhoneConnected(dc,y);
 		}
 		
 		if(display_altimeter){
-			drawMountain(dc);
-       		drawAlti(dc);
+			drawMountain(dc,arc_type);
+       		drawAlti(dc,arc_type);
        	}
        
-       	drawArc(dc);  	
+       	drawArc(dc,arc_type);  	
     }
     
 
 
-    function drawHour(dc){
+    function drawHour(dc,display_altimeter){
         
         var hour;
         if (settings.is24Hour) {
@@ -173,7 +178,7 @@ class WatchFaceView extends Ui.WatchFace{
     
     
     
-    function drawDate(dc){
+    function drawDate(dc,y){
     	var dateString;
     	var date_type =  App.getApp().getProperty("date_type");
     	if(date_type == 0){
@@ -182,10 +187,10 @@ class WatchFaceView extends Ui.WatchFace{
     		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
     	}
     	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(cx, cy-text_height_hour/2-30, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
     }
     
-    function drawAlti(dc){
+    function drawAlti(dc,arc_type){
         var actaltitude = 4000;
 		var altitudeStr;
 		var y;
@@ -211,7 +216,7 @@ class WatchFaceView extends Ui.WatchFace{
 		dc.drawText(x + 105-text_width/2, y - 24/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
     }
     
-    function drawMountain(dc){
+    function drawMountain(dc,arc_type){
 		var y;
 		if(arc_type==3){
 			y = 192;
@@ -269,7 +274,7 @@ class WatchFaceView extends Ui.WatchFace{
         }
     }
 
-    function drawArc(dc){
+    function drawArc(dc,arc_type){
         if(arc_type<3){
         	var arc_width =  App.getApp().getProperty("arc_width");
         	dc.setPenWidth(arc_width);
@@ -339,16 +344,16 @@ class WatchFaceView extends Ui.WatchFace{
         }
     }
     
-    function drawBattery(dc){
+    function drawBattery(dc,yStart){
     	var battery = System.getSystemStats().battery;
     	var width=35;
     	var height=19;
     	var xStart= cx-width/2;
-    	var yStart = cy-text_height_hour/2-30;
+    	
     	dc.setPenWidth(1);
     	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-    	dc.drawRectangle(xStart, yStart, width, height);
-        dc.fillRectangle(xStart + width - 1, yStart + 6, 3, height - 12);   
+    	dc.drawRectangle(xStart, yStart-height/2, width, height);
+        dc.fillRectangle(xStart + width - 1, yStart-height/2 + 6, 3, height - 12);   
        
         var battery_low =  App.getApp().getProperty("battery_low");
     	if(battery<=battery_low){
@@ -358,9 +363,25 @@ class WatchFaceView extends Ui.WatchFace{
         var display_perrcentage = App.getApp().getProperty("battery_percentage");
         
         if(display_perrcentage){
-            dc.drawText(xStart+width/2 , yStart, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(xStart+width/2 , yStart-height/2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
         }else{
-        	dc.fillRectangle(xStart + 1, yStart + 1, (width-2) * battery / 100, height - 2);
+        	dc.fillRectangle(xStart + 1, yStart-height/2 + 1, (width-2) * battery / 100, height - 2);
         }
     }
+    
+    function drawPhoneConnected(dc,y){
+		var x = cx;
+		var size = 6;
+		var width = 2 ;
+
+		dc.setPenWidth(2);
+		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+
+    	dc.fillPolygon([[x-size,y-size], [x-size+width,y-size-width],[x+size+width,y+size-width],[x+size,y+size]]);
+		dc.fillPolygon([[x+size,y+size],[x+size-width,y+size-width],[x-width+1,y+size*2-width],[x,y+size*2]]);
+		dc.fillPolygon([[x+2,y+size*2-2],[x+2-width-1,y+size*2+width-2],[x+2-width-1,y-size*2-width+2],[x+2,y-size*2+2]]);
+		dc.fillPolygon([[x,y-size*2],[x-width+1,y-size*2+width],[x+size-width,y-size+width],[x+size,y-size]]);
+		dc.fillPolygon([[x+size,y-size],[x+size+width,y-size+width],[x-size+width,y+size+width],[x-size,y+size]]);
+
+	}
 }
