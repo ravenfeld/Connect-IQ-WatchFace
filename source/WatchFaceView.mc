@@ -18,7 +18,6 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var text_width_second;
 	hidden var text_height_hour;
 	hidden var text_height_second;
-	hidden var text_y_hour;
 	hidden var text_y_second;
 	hidden var start_x_active_hour_10;
 	hidden var start_x_active_hour_1;
@@ -67,6 +66,7 @@ class WatchFaceView extends Ui.WatchFace{
     	var arc_type =  App.getApp().getProperty("arc_type");
     	var info_top = App.getApp().getProperty("info_top");
     	var info_bottom = App.getApp().getProperty("info_bottom");
+    	var display_second = App.getApp().getProperty("second_display");
     	
     	var battery = Sys.getSystemStats().battery;
     	var battery_low =  App.getApp().getProperty("battery_low");
@@ -80,8 +80,8 @@ class WatchFaceView extends Ui.WatchFace{
         var moment = Time.now();
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
-		drawHour(dc,shade_color,info_bottom==0);
-		
+        drawHour(dc,shade_color,info_bottom,active&&display_second);
+    
 		var y;
 		if(info_top == 0){
 			y = cy-text_height_hour/2-27;
@@ -128,51 +128,29 @@ class WatchFaceView extends Ui.WatchFace{
         	} 	
        	}
     }
+        
+    function drawDate(dc,y){
+    	var dateString;
+    	var date_type =  App.getApp().getProperty("date_type");
+    	if(date_type == 0){
+    		dateString = Lang.format("$1$ $2$", [info.day_of_week.substring(0,3), info.day]);
+    	}else{
+    		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
+    	}
+    	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
+    }
     
-
-
-    function drawHour(dc,shade_color,display_altimeter){
-        
-        var hour;
-        if (settings.is24Hour) {
-            hour = info.hour;
-        } else if (info.hour > 12) {
-            hour = info.hour - 12;
-        } else if (info.hour == 0) {
-            hour = 12;
-        } else {
-            hour = info.hour;
-        }
-        
-        var secondString;
-        if (info.sec >= 10) {
-            secondString = Lang.format("$1$", [info.sec.format("%d")]);
-        } else {
-            secondString = Lang.format("0$1$", [info.sec.format("%d")]);
-        }
-        
-        var minuteString;
-        if (info.min >= 10) {
-            minuteString = Lang.format("$1$", [info.min.format("%d")]);
-        } else {
-            minuteString = Lang.format("0$1$", [info.min.format("%d")]);
-        }
-        var hourString;
-        if (settings.is24Hour && hour < 10) {
-            hourString = Lang.format("0$1$", [hour]);   
-        } else {
-            hourString = Lang.format("$1$", [hour]);
-        }
-        
-        if(display_altimeter){
+    function drawHour(dc,shade_color,info_bottom,display_second){
+        var text_y_hour;
+        if(info_bottom==0){
         	text_y_hour = cy-12;
         }else{
         	text_y_hour = cy;
         }
-        
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || hour>=10){
+        if(settings.is24Hour || (info.hour-12)>=10){
         	text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;
@@ -186,40 +164,9 @@ class WatchFaceView extends Ui.WatchFace{
         	}else{
         		start_x=start_x_sleep_hour_1;
         	}
-        } 
-                
-        dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(start_x, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, hourString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
-        
-        var start_point=start_x+text_width_hour+2;
-        dc.drawText(start_point, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, ":", Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
-        
-        dc.setColor(shade_color, Gfx.COLOR_TRANSPARENT);
-        var start_minute=start_point+text_width_point+2;
-        dc.drawText(start_minute, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, minuteString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
-        
-        var display_second = App.getApp().getProperty("second_display");
-        if(active && display_second){
-        	var start_second=start_minute+text_width_minute+4;
-        	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
-        	dc.drawText(start_second, cy-text_height_hour/2+text_height_second/2, Gfx.FONT_NUMBER_MEDIUM, secondString, Graphics.TEXT_JUSTIFY_VCENTER |Graphics.TEXT_JUSTIFY_LEFT);
-		}
+        }
+		Date.drawHour(dc,info,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
     }
-    
-    
-    
-    function drawDate(dc,y){
-    	var dateString;
-    	var date_type =  App.getApp().getProperty("date_type");
-    	if(date_type == 0){
-    		dateString = Lang.format("$1$ $2$", [info.day_of_week.substring(0,3), info.day]);
-    	}else{
-    		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
-    	}
-    	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
-    }
-    
     
     function getColorShade(){
         var shade_color =  App.getApp().getProperty("shade_color");
