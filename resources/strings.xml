@@ -7,6 +7,9 @@
     <string id="date">Date</string>
     <string id="phone_connected">Phone connected</string>
     <string id="altimeter">Altimeter</string>
+    <string id="calorie">Calorie</string>
+    <string id="step">Step</string>
+    <string id="distance">Distance</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>
@@ -23,12 +26,11 @@
     <string id="color_red_dark">Red dark</string>
     <string id="color_white">White</string>
     <string id="color_black">Black</string>
+    <string id="color_yellow">Yellow</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Color arc</string>
     <string id="arc_width_title">Width arc</string>
-    <string id="arc_type_battery">Battery</string>
-	<string id="arc_type_step">Step</string>
-	<string id="arc_type_activity">Level activity</string>
+	<string id="activity">Level activity</string>
 	<string id="none">None</string>
 	<string id="battery_low_title">Battery low</string>
 	<string id="date_type_title">Format date</string>

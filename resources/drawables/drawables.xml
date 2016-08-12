@@ -1,3 +1,9 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="CalorieIconWhite" filename="calorie_icon_white.png" />
+    <bitmap id="CalorieIconBlack" filename="calorie_icon_black.png" />
+    <bitmap id="StepIconWhite" filename="step_icon_white.png" />
+    <bitmap id="StepIconBlack" filename="step_icon_black.png" />
+    <bitmap id="DistanceIconWhite" filename="distance_icon_white.png" />
+    <bitmap id="DistanceIconBlack" filename="distance_icon_black.png" />
 </drawables>
