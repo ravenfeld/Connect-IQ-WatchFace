@@ -24,8 +24,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var start_x_active_hour_1;
 	hidden var start_x_sleep_hour_10;
 	hidden var start_x_sleep_hour_1;
-	hidden var color_text;
-	hidden var color_user;
+	hidden var text_color;
+	
 	
 	function initialize() {
         WatchFace.initialize();
@@ -74,13 +74,13 @@ class WatchFaceView extends Ui.WatchFace{
     	var battery_percentage = App.getApp().getProperty("battery_percentage");
     	
     	setBackgroundColor(dc);
-    	setColorShade();
+    	var shade_color = getColorShade();
         dc.clear();
 
         var moment = Time.now();
         info = Gregorian.info(moment, Time.FORMAT_MEDIUM);
         
-		drawHour(dc,info_bottom==0);
+		drawHour(dc,shade_color,info_bottom==0);
 		
 		var y;
 		if(info_top == 0){
@@ -88,7 +88,7 @@ class WatchFaceView extends Ui.WatchFace{
 			drawDate(dc,y);
 		}else if( info_top == 1){
 			y = cy-text_height_hour/2-15;
-			Battery.drawIcon(dc,battery,battery_low,cx,y,color_text,battery_percentage);
+			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);
 			
 		}else if (info_top == 2 && settings.phoneConnected){
 			y = cy-text_height_hour/2-15;
@@ -97,13 +97,19 @@ class WatchFaceView extends Ui.WatchFace{
 		
 		
 		if(info_bottom == 0){
-       		drawAlti(dc,arc_type);	
+			if(arc_type==3){
+				y = 192;
+			}else{
+				y = 185;
+			}
+			var x = 40;
+       		Altimeter.draw(dc,x,y,text_color,text_color,shade_color);	
 		}else if( info_bottom == 1){
 			y = cy+text_height_hour/2;
 			drawDate(dc,y);
 		}else if(info_bottom ==2){
 			y = cy+text_height_hour/2+20;
-			Battery.drawIcon(dc,battery,battery_low,cx,y,color_text,battery_percentage);	
+			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);	
 		}else if (info_bottom == 3 && settings.phoneConnected){
 			y = cy+text_height_hour/2+20;
 			drawPhoneConnected(dc,y);
@@ -125,7 +131,7 @@ class WatchFaceView extends Ui.WatchFace{
     
 
 
-    function drawHour(dc,display_altimeter){
+    function drawHour(dc,shade_color,display_altimeter){
         
         var hour;
         if (settings.is24Hour) {
@@ -182,20 +188,20 @@ class WatchFaceView extends Ui.WatchFace{
         	}
         } 
                 
-        dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
         dc.drawText(start_x, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, hourString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         var start_point=start_x+text_width_hour+2;
         dc.drawText(start_point, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, ":", Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
-        dc.setColor(color_user, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(shade_color, Gfx.COLOR_TRANSPARENT);
         var start_minute=start_point+text_width_point+2;
         dc.drawText(start_minute, text_y_hour, Gfx.FONT_NUMBER_THAI_HOT, minuteString, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
         
         var display_second = App.getApp().getProperty("second_display");
         if(active && display_second){
         	var start_second=start_minute+text_width_minute+4;
-        	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+        	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
         	dc.drawText(start_second, cy-text_height_hour/2+text_height_second/2, Gfx.FONT_NUMBER_MEDIUM, secondString, Graphics.TEXT_JUSTIFY_VCENTER |Graphics.TEXT_JUSTIFY_LEFT);
 		}
     }
@@ -210,87 +216,47 @@ class WatchFaceView extends Ui.WatchFace{
     	}else{
     		dateString = Lang.format("$1$ $2$ $3$", [info.day_of_week.substring(0,3), info.day, info.month.substring(0,3)]);
     	}
-    	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+    	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
         dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Graphics.TEXT_JUSTIFY_CENTER);
     }
     
-    function drawAlti(dc,arc_type){
-    	
-        var actaltitude = 0;
-		var altitudeStr;
-		var y;
-		if(arc_type==3){
-			y = 192;
-		}else{
-			y = 185;
-		}
-		var x = 40;
     
-    	drawMountain(dc,x,y);
-    	
-        var actInfo = Act.getActivityInfo();
-		if (actInfo != null && actInfo.altitude != null) {
-			actaltitude = actInfo.altitude;				
-		}
-		var metric = Sys.getDeviceSettings().elevationUnits;
-		if (metric==Sys.UNIT_METRIC) {
-			altitudeStr = format("$1$m", [actaltitude.format("%d")]);
-		} else {
-			altitudeStr = format("$1$ft", [actaltitude.format("%d")]);
-		}
-		var text_width = dc.getTextWidthInPixels(altitudeStr,Gfx.FONT_MEDIUM);
-		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-		dc.drawText(x + 105-text_width/2, y - 24/2, Gfx.FONT_MEDIUM, altitudeStr, Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_LEFT);
-    }
-    
-    function drawMountain(dc,x,y){
-    
-        dc.setColor( color_user,Gfx.COLOR_TRANSPARENT);
-        dc.fillRectangle(0, y-23, dc.getWidth(), 26);
-        var mountain_1 = [ [x,y], [x+23,y-40],[x+35,y-20], [x+21,y]  ];
-        var mountain_2 = [ [x+24,y], [x+45,y-30], [x+65,y]  ];
-        dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-        dc.fillPolygon(mountain_1);
-        dc.fillPolygon(mountain_2);
-    }
-    
-    function setColorShade(){
-        var user_color =  App.getApp().getProperty("shade_color");
-        if(user_color == 0){
-        	color_user = Gfx.COLOR_DK_RED;
-        }else if (user_color == 1) {
-        	color_user = Gfx.COLOR_BLUE;
-        }else if (user_color == 2) {
-        	color_user = Gfx.COLOR_DK_BLUE;
-        }else if (user_color == 3) {
-        	color_user = Gfx.COLOR_GREEN;
-        }else if (user_color == 4) {
-        	color_user = Gfx.COLOR_DK_GREEN;
-        }else if (user_color == 5) {
-        	color_user = Gfx.COLOR_LT_GRAY;
-        }else if (user_color == 6) {
-        	color_user = Gfx.COLOR_DK_GRAY;
-        }else if (user_color == 7) {
-        	color_user = Gfx.COLOR_ORANGE;
-        }else if (user_color == 8) {
-        	color_user = Gfx.COLOR_PINK;
-        }else if (user_color == 9) {
-        	color_user = Gfx.COLOR_PURPLE;
-        }else if (user_color == 10) {
-        	color_user = Gfx.COLOR_RED;
-        }else if (user_color == 11) {
-        	color_user = Gfx.COLOR_DK_RED;
+    function getColorShade(){
+        var shade_color =  App.getApp().getProperty("shade_color");
+		if (shade_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (shade_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (shade_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (shade_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (shade_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (shade_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (shade_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (shade_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (shade_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (shade_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (shade_color == 11) {
+        	return Gfx.COLOR_DK_RED;
         }
+        return Gfx.COLOR_DK_RED;
     }
     
     function setBackgroundColor(dc){
         var bgk_color =  App.getApp().getProperty("bgk_color");
         if(bgk_color == 0){
         	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
-        	color_text = Gfx.COLOR_WHITE;
+        	text_color = Gfx.COLOR_WHITE;
         }else if (bgk_color == 1) {
         	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
-        	color_text = Gfx.COLOR_BLACK;
+        	text_color = Gfx.COLOR_BLACK;
         }
     }
 
@@ -311,31 +277,31 @@ class WatchFaceView extends Ui.WatchFace{
     }
         
     function getColorArc(){
-        var user_color =  App.getApp().getProperty("arc_color");
-        if (user_color == 1) {
+        var arc_color =  App.getApp().getProperty("arc_color");
+        if (arc_color == 1) {
         	return Gfx.COLOR_BLUE;
-        }else if (user_color == 2) {
+        }else if (arc_color == 2) {
         	return Gfx.COLOR_DK_BLUE;
-        }else if (user_color == 3) {
+        }else if (arc_color == 3) {
         	return Gfx.COLOR_GREEN;
-        }else if (user_color == 4) {
+        }else if (arc_color == 4) {
         	return Gfx.COLOR_DK_GREEN;
-        }else if (user_color == 5) {
+        }else if (arc_color == 5) {
         	return Gfx.COLOR_LT_GRAY;
-        }else if (user_color == 6) {
+        }else if (arc_color == 6) {
         	return Gfx.COLOR_DK_GRAY;
-        }else if (user_color == 7) {
+        }else if (arc_color == 7) {
         	return Gfx.COLOR_ORANGE;
-        }else if (user_color == 8) {
+        }else if (arc_color == 8) {
         	return Gfx.COLOR_PINK;
-        }else if (user_color == 9) {
+        }else if (arc_color == 9) {
         	return Gfx.COLOR_PURPLE;
-        }else if (user_color == 10) {
+        }else if (arc_color == 10) {
         	return Gfx.COLOR_RED;
-        }else if (user_color == 11) {
+        }else if (arc_color == 11) {
         	return Gfx.COLOR_DK_RED;
         }
-        return color_text;
+        return text_color;
     }
         
     function drawPhoneConnected(dc,y){
@@ -344,7 +310,7 @@ class WatchFaceView extends Ui.WatchFace{
 		var width = 2 ;
 
 		dc.setPenWidth(2);
-		dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
+		dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
 
     	dc.fillPolygon([[x-size,y-size], [x-size+width,y-size-width],[x+size+width,y+size-width],[x+size,y+size]]);
 		dc.fillPolygon([[x+size,y+size],[x+size-width,y+size-width],[x-width+1,y+size*2-width],[x,y+size*2]]);
