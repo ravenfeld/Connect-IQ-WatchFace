@@ -53,8 +53,6 @@ class WatchFaceView extends Ui.WatchFace{
         text_width_second=dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_MEDIUM);
         text_height_second = dc.getFontHeight(Gfx.FONT_NUMBER_MEDIUM);
         
-      
-		
         start_x_active_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
@@ -122,7 +120,7 @@ class WatchFaceView extends Ui.WatchFace{
        		}else if (arc_type == 1) {
         		Step.drawArc(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
         	}else if (arc_type == 2) {
-        		drawArcActivity(dc);
+        		MoveBar.drawArc(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
        	}
     }
@@ -191,13 +189,6 @@ class WatchFaceView extends Ui.WatchFace{
         	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
         	text_color = Gfx.COLOR_BLACK;
         }
-    }
-
-    function drawArcActivity(dc){
-    	var percentage_activity = ActivityMonitor.getInfo().moveBarLevel*360/ActivityMonitor.MOVE_BAR_LEVEL_MAX;
-    	if(percentage_activity>0){
-       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_activity.toLong()+90)%360);   
-       	}
     }
         
     function getColorArc(){
