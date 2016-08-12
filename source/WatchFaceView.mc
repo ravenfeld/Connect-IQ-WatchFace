@@ -92,7 +92,7 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	var battery_percentage = App.getApp().getProperty("battery_percentage");
     	
-    	var bgk_color = getBackgroundColor(dc);
+    	var bgk_color = getBackgroundColor();
     	dc.setColor(bgk_color,bgk_color);
     	
     	if(bgk_color==Gfx.COLOR_BLACK){
