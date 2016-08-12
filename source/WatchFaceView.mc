@@ -44,6 +44,21 @@ class WatchFaceView extends Ui.WatchFace{
     	Ui.requestUpdate();
     }
     
+    function onShow(){
+        calorie_icon_white = Ui.loadResource(Rez.Drawables.CalorieIconWhite);
+    	calorie_icon_black = Ui.loadResource(Rez.Drawables.CalorieIconBlack);
+
+    	step_icon_white = Ui.loadResource(Rez.Drawables.StepIconWhite);
+    	step_icon_black = Ui.loadResource(Rez.Drawables.StepIconBlack);
+    	
+    	distance_icon_white = Ui.loadResource(Rez.Drawables.DistanceIconWhite);
+    	distance_icon_black = Ui.loadResource(Rez.Drawables.DistanceIconBlack);
+    }
+    
+    function onHide(){
+    	
+    }
+    
     function onLayout(dc) {
         settings = System.getDeviceSettings();
 
@@ -62,15 +77,7 @@ class WatchFaceView extends Ui.WatchFace{
         start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
         start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
-    
-    	calorie_icon_white = Ui.loadResource(Rez.Drawables.CalorieIconWhite);
-    	calorie_icon_black = Ui.loadResource(Rez.Drawables.CalorieIconBlack);
-
-    	step_icon_white = Ui.loadResource(Rez.Drawables.StepIconWhite);
-    	step_icon_black = Ui.loadResource(Rez.Drawables.StepIconBlack);
-    	
-    	distance_icon_white = Ui.loadResource(Rez.Drawables.DistanceIconWhite);
-    	distance_icon_black = Ui.loadResource(Rez.Drawables.DistanceIconBlack);
+   
     }
     
     function onUpdate(dc) {
