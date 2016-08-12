@@ -68,6 +68,11 @@ class WatchFaceView extends Ui.WatchFace{
     	var info_top = App.getApp().getProperty("info_top");
     	var info_bottom = App.getApp().getProperty("info_bottom");
     	
+    	var battery = Sys.getSystemStats().battery;
+    	var battery_low =  App.getApp().getProperty("battery_low");
+    	
+    	var battery_percentage = App.getApp().getProperty("battery_percentage");
+    	
     	setBackgroundColor(dc);
     	setColorShade();
         dc.clear();
@@ -83,7 +88,8 @@ class WatchFaceView extends Ui.WatchFace{
 			drawDate(dc,y);
 		}else if( info_top == 1){
 			y = cy-text_height_hour/2-15;
-			drawBattery(dc,y);
+			Battery.drawIcon(dc,battery,battery_low,cx,y,color_text,battery_percentage);
+			
 		}else if (info_top == 2 && settings.phoneConnected){
 			y = cy-text_height_hour/2-15;
 			drawPhoneConnected(dc,y);
@@ -97,14 +103,23 @@ class WatchFaceView extends Ui.WatchFace{
 			drawDate(dc,y);
 		}else if(info_bottom ==2){
 			y = cy+text_height_hour/2+20;
-			drawBattery(dc,y);	
+			Battery.drawIcon(dc,battery,battery_low,cx,y,color_text,battery_percentage);	
 		}else if (info_bottom == 3 && settings.phoneConnected){
 			y = cy+text_height_hour/2+20;
 			drawPhoneConnected(dc,y);
 		}
 		
 		if(arc_type<3){
-       		drawArc(dc,arc_type);  	
+       		var arc_width =  App.getApp().getProperty("arc_width");
+      
+      
+       		if(arc_type == 0){
+       			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
+       		}else if (arc_type == 1) {
+        		drawArcStep(dc);
+        	}else if (arc_type == 2) {
+        		drawArcActivity(dc);
+        	} 	
        	}
     }
     
@@ -279,30 +294,7 @@ class WatchFaceView extends Ui.WatchFace{
         }
     }
 
-    function drawArc(dc,arc_type){
-       	var arc_width =  App.getApp().getProperty("arc_width");
-       	dc.setPenWidth(arc_width);
-        	setColorArc(dc); 
-       	if(arc_type == 0){
-       		drawArcBattery(dc);
-       	}else if (arc_type == 1) {
-        	drawArcStep(dc);
-        }else if (arc_type == 2) {
-        	drawArcActivity(dc);
-        }
-    }
     
-    function drawArcBattery(dc){
-    	var battery = Sys.getSystemStats().battery;
-    	var battery_low =  App.getApp().getProperty("battery_low");
-    	if(battery<=battery_low){
-    		dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
-    	}
-       	var percentage_battery = battery*360/100;
-       	if(percentage_battery>0){
-       		dc.drawArc(cx,cy,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-percentage_battery.toLong()+90)%360); 
-       	}
-    }
     
     function drawArcStep(dc){
     	var percentage_step = ActivityMonitor.getInfo().steps*360/ActivityMonitor.getInfo().stepGoal;
@@ -318,60 +310,34 @@ class WatchFaceView extends Ui.WatchFace{
        	}
     }
         
-    function setColorArc(dc){
+    function getColorArc(){
         var user_color =  App.getApp().getProperty("arc_color");
-        if(user_color == 0){
-        	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-        }else if (user_color == 1) {
-        	dc.setColor(Gfx.COLOR_BLUE, Gfx.COLOR_TRANSPARENT);
+        if (user_color == 1) {
+        	return Gfx.COLOR_BLUE;
         }else if (user_color == 2) {
-        	dc.setColor(Gfx.COLOR_DK_BLUE, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_DK_BLUE;
         }else if (user_color == 3) {
-        	dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_GREEN;
         }else if (user_color == 4) {
-        	dc.setColor(Gfx.COLOR_DK_GREEN, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_DK_GREEN;
         }else if (user_color == 5) {
-        	dc.setColor(Gfx.COLOR_LT_GRAY, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_LT_GRAY;
         }else if (user_color == 6) {
-        	dc.setColor(Gfx.COLOR_DK_GRAY, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_DK_GRAY;
         }else if (user_color == 7) {
-        	dc.setColor(Gfx.COLOR_ORANGE, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_ORANGE;
         }else if (user_color == 8) {
-        	dc.setColor(Gfx.COLOR_PINK, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_PINK;
         }else if (user_color == 9) {
-        	dc.setColor(Gfx.COLOR_PURPLE, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_PURPLE;
         }else if (user_color == 10) {
-        	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_RED;
         }else if (user_color == 11) {
-        	dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
+        	return Gfx.COLOR_DK_RED;
         }
+        return color_text;
     }
-    
-    function drawBattery(dc,yStart){
-    	var battery = System.getSystemStats().battery;
-    	var width=35;
-    	var height=19;
-    	var xStart= cx-width/2;
-    	
-    	dc.setPenWidth(1);
-    	dc.setColor(color_text, Gfx.COLOR_TRANSPARENT);
-    	dc.drawRectangle(xStart, yStart-height/2, width, height);
-        dc.fillRectangle(xStart + width - 1, yStart-height/2 + 6, 3, height - 12);   
-       
-        var battery_low =  App.getApp().getProperty("battery_low");
-    	if(battery<=battery_low){
-            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        }
         
-        var display_perrcentage = App.getApp().getProperty("battery_percentage");
-        
-        if(display_perrcentage){
-            dc.drawText(xStart+width/2 , yStart-height/2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
-        }else{
-        	dc.fillRectangle(xStart + 1, yStart-height/2 + 1, (width-2) * battery / 100, height - 2);
-        }
-    }
-    
     function drawPhoneConnected(dc,y){
 		var x = cx;
 		var size = 6;
