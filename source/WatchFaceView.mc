@@ -25,6 +25,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var text_color;
 	hidden var calorie_icon_white;
 	hidden var calorie_icon_black;
+	hidden var step_icon_white;
+	hidden var step_icon_black;
 	
 	function initialize() {
         WatchFace.initialize();
@@ -61,6 +63,9 @@ class WatchFaceView extends Ui.WatchFace{
     
     	calorie_icon_white = Ui.loadResource(Rez.Drawables.CalorieIconWhite);
     	calorie_icon_black = Ui.loadResource(Rez.Drawables.CalorieIconBlack);
+
+    	step_icon_white = Ui.loadResource(Rez.Drawables.StepIconWhite);
+    	step_icon_black = Ui.loadResource(Rez.Drawables.StepIconBlack);
     }
     
     function onUpdate(dc) {
@@ -110,7 +115,16 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				calorie_icon = calorie_icon_black;
 			}
-			InfoMonitor.drawCalorie(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+		}else if(info_top == 4){
+			y = cy-text_height_hour/2-15;
+			var step_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				step_icon = step_icon_white;
+			}else{
+				step_icon = step_icon_black;
+			}
+			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}
 		
 		
@@ -139,7 +153,16 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				calorie_icon = calorie_icon_black;
 			}
-			InfoMonitor.drawCalorie(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+		}else if(info_bottom == 5){
+			y = cy+text_height_hour/2+20;
+			var step_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				step_icon = step_icon_white;
+			}else{
+				step_icon = step_icon_black;
+			}
+			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}
 		
 		if(arc_type<3){
@@ -153,6 +176,11 @@ class WatchFaceView extends Ui.WatchFace{
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
        	}
+       	
+       	Sys.println("step "+ ActivityMonitor.getInfo().moveBarLevel);
+		Sys.println("calorie "+ ActivityMonitor.getInfo().calories);
+		Sys.println("distance "+ ActivityMonitor.getInfo().distance);
+       	
     }
             
     function drawHour(dc,info_date,shade_color,info_bottom,display_second){

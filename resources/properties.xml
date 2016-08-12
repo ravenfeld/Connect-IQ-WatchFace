@@ -25,7 +25,8 @@
             	<listEntry value="1">@Strings.battery</listEntry>
             	<listEntry value="2">@Strings.phone_connected</listEntry>
             	<listEntry value="3">@Strings.calorie</listEntry>
-            	<listEntry value="4">@Strings.none</listEntry>
+            	<listEntry value="4">@Strings.step</listEntry>
+            	<listEntry value="5">@Strings.none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.info_bottom" title="@Strings.info_bottom_title" prompt="@Strings.info_bottom_title">
@@ -35,7 +36,8 @@
             	<listEntry value="2">@Strings.battery</listEntry>
             	<listEntry value="3">@Strings.phone_connected</listEntry>
             	<listEntry value="4">@Strings.calorie</listEntry>
-            	<listEntry value="5">@Strings.none</listEntry>
+            	<listEntry value="5">@Strings.step</listEntry>
+            	<listEntry value="6">@Strings.none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.date_type" title="@Strings.date_type_title">
@@ -69,9 +71,9 @@
         </setting>
         <setting propertyKey="@Properties.arc_type" title="@Strings.arc_type_title">
             <settingConfig type="list">
-            	<listEntry value="0">@Strings.arc_type_battery</listEntry>
-            	<listEntry value="1">@Strings.arc_type_step</listEntry>
-            	<listEntry value="2">@Strings.arc_type_activity</listEntry>
+            	<listEntry value="0">@Strings.battery</listEntry>
+            	<listEntry value="1">@Strings.step</listEntry>
+            	<listEntry value="2">@Strings.activity</listEntry>
             	<listEntry value="3">@Strings.none</listEntry>
             </settingConfig>
         </setting>
