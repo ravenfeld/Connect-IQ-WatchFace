@@ -27,7 +27,9 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var calorie_icon_black;
 	hidden var step_icon_white;
 	hidden var step_icon_black;
-	
+	hidden var distance_icon_white;
+	hidden var distance_icon_black;
+		
 	function initialize() {
         WatchFace.initialize();
     }
@@ -66,6 +68,9 @@ class WatchFaceView extends Ui.WatchFace{
 
     	step_icon_white = Ui.loadResource(Rez.Drawables.StepIconWhite);
     	step_icon_black = Ui.loadResource(Rez.Drawables.StepIconBlack);
+    	
+    	distance_icon_white = Ui.loadResource(Rez.Drawables.DistanceIconWhite);
+    	distance_icon_black = Ui.loadResource(Rez.Drawables.DistanceIconBlack);
     }
     
     function onUpdate(dc) {
@@ -125,6 +130,16 @@ class WatchFaceView extends Ui.WatchFace{
 				step_icon = step_icon_black;
 			}
 			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
+		}else if(info_top == 5){
+			y = cy-text_height_hour/2-15;
+			var distance_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				distance_icon = distance_icon_white;
+			}else{
+				distance_icon = distance_icon_black;
+			}
+		
+			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
 		}
 		
 		
@@ -163,6 +178,16 @@ class WatchFaceView extends Ui.WatchFace{
 				step_icon = step_icon_black;
 			}
 			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
+		}else if(info_bottom == 6){
+			y = cy+text_height_hour/2+20;
+			var distance_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				distance_icon = distance_icon_white;
+			}else{
+				distance_icon = distance_icon_black;
+			}
+			
+			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
 		}
 		
 		if(arc_type<3){
@@ -175,12 +200,7 @@ class WatchFaceView extends Ui.WatchFace{
         	}else if (arc_type == 2) {
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
-       	}
-       	
-       	Sys.println("step "+ ActivityMonitor.getInfo().moveBarLevel);
-		Sys.println("calorie "+ ActivityMonitor.getInfo().calories);
-		Sys.println("distance "+ ActivityMonitor.getInfo().distance);
-       	
+       	}       	
     }
             
     function drawHour(dc,info_date,shade_color,info_bottom,display_second){
