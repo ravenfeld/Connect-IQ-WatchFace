@@ -62,6 +62,7 @@
             	<listEntry value="9">@Strings.color_purple</listEntry>
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.arc_type" title="@Strings.arc_type_title">
@@ -86,6 +87,7 @@
             	<listEntry value="9">@Strings.color_purple</listEntry>
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
             </settingConfig>
         </setting>
                 <setting propertyKey="@Properties.arc_width" title="@Strings.arc_width_title" prompt="@Strings.arc_width_title">

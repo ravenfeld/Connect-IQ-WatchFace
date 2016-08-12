@@ -176,18 +176,18 @@ class WatchFaceView extends Ui.WatchFace{
         	return Gfx.COLOR_RED;
         }else if (shade_color == 11) {
         	return Gfx.COLOR_DK_RED;
+        }else if (shade_color == 12) {
+        	return Gfx.COLOR_YELLOW;
         }
         return Gfx.COLOR_DK_RED;
     }
     
-    function setBackgroundColor(dc){
+    function getBackgroundColor(){
         var bgk_color =  App.getApp().getProperty("bgk_color");
         if(bgk_color == 0){
-        	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
-        	text_color = Gfx.COLOR_WHITE;
-        }else if (bgk_color == 1) {
-        	dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_WHITE );
-        	text_color = Gfx.COLOR_BLACK;
+        	return Gfx.COLOR_BLACK;
+        }else{
+        	return Gfx.COLOR_WHITE;
         }
     }
         
@@ -215,6 +215,8 @@ class WatchFaceView extends Ui.WatchFace{
         	return Gfx.COLOR_RED;
         }else if (arc_color == 11) {
         	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
         }
         return text_color;
     }

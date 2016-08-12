@@ -23,6 +23,7 @@
     <string id="color_red_dark">Rouge foncé</string>
     <string id="color_white">Blanc</string>
     <string id="color_black">Noir</string>
+    <string id="color_yellow">Jaune</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Couleur de l'arc</string>
     <string id="arc_width_title">Épaisseur de l'arc</string>
