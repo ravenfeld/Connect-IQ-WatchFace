@@ -33,7 +33,7 @@ module InfoMonitor{
 	
 	function drawIconDistance(dc,distance,x,y,text_color,distance_icon){
 		var distanceStr;
-		var metric = Sys.getDeviceSettings().elevationUnits;
+		var metric = Sys.getDeviceSettings().distanceUnits;
 		if (metric==Sys.UNIT_METRIC) {
 			if(distance/100000.0>=1){
 				distanceStr=Lang.format("$1$km", [(distance/100000.0).format("%.2f")]);
