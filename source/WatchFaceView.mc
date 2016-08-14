@@ -89,6 +89,7 @@ class WatchFaceView extends Ui.WatchFace{
     	var date_type =  App.getApp().getProperty("date_type");
     	var battery_low =  App.getApp().getProperty("battery_low");
     	var battery_percentage = App.getApp().getProperty("battery_percentage");
+    	var battery_profile = App.getApp().getProperty("battery_profile");
     	var altitude_profile = App.getApp().getProperty("altitude_profile");
     	var altitude_step =  App.getApp().getProperty("altitude_step");
     	//Battery
@@ -108,6 +109,9 @@ class WatchFaceView extends Ui.WatchFace{
 			}				
 		}
     	
+    	if(battery_profile && battery<=battery_low){
+    		info_top=1;
+    	}
     	if(altitude_profile && altitude>altitude_step){
 			info_bottom=0;
 		}

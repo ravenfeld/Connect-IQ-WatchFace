@@ -12,6 +12,7 @@
         <property id="arc_width" type="number">4</property>
         <property id="battery_low" type="number">15</property>
         <property id="battery_percentage" type="boolean">false</property>
+        <property id="battery_profile" type="boolean">false</property>
         <property id="altitude_profile" type="boolean">false</property>
         <property id="altitude_step" type="number">1000</property>
     </properties>
@@ -105,6 +106,9 @@
             <settingConfig type="numeric" min="0" max="100" />
         </setting>
         <setting propertyKey="@Properties.battery_percentage" title="@Strings.battery_percentage_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.battery_profile" title="@Strings.battery_profile_title">
             <settingConfig type="boolean" />
         </setting>
         <setting propertyKey="@Properties.altitude_profile" title="@Strings.altitude_profile_title">
