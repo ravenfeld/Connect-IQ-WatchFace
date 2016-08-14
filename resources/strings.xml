@@ -37,4 +37,6 @@
 	<string id="date_type_day">EE d</string>
 	<string id="date_type_day_month">EE d MM</string>
 	<string id="battery_percentage_title">Display percentage battery</string>
+	<string id="altitude_profile_title">Display altitude if the step is exceeded</string>
+	<string id="altitude_step_title">Altitude step</string>
 </resources>
