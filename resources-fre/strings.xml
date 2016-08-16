@@ -36,6 +36,7 @@
 	<string id="date_type_title">Formattage de la date</string>
 	<string id="date_type_day">EE d</string>
 	<string id="date_type_day_month">EE d MM</string>
+	<string id="date_type_month">d MM</string>
 	<string id="battery_percentage_title">Affichage pourcentage de la batterie</string>
 	<string id="battery_profile_title">Affichage de la batterie si la batterie est faible</string>
 	<string id="altitude_profile_title">Affichage de l'altitude si le seuil est dépassé</string>

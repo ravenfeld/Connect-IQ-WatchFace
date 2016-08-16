@@ -49,6 +49,7 @@
             <settingConfig type="list">
             	<listEntry value="0">@Strings.date_type_day</listEntry>
             	<listEntry value="1">@Strings.date_type_day_month</listEntry>
+            	<listEntry value="2">@Strings.date_type_month</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
