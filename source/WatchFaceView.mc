@@ -241,7 +241,7 @@ class WatchFaceView extends Ui.WatchFace{
         }
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || (info_date.hour-12)>=10 ||info_date.hour==0){
+        if(settings.is24Hour || (info_date.hour-10)>=0 ||info_date.hour==0){
         	text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;
