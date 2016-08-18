@@ -60,7 +60,7 @@ module Date{
     	}else if(date_type==1){
     		dateString = Lang.format("$1$ $2$ $3$", [date.day_of_week.substring(0,3), date.day, date.month.substring(0,3)]);
     	}else{
-    		dateString = Lang.format("$2$ $3$", [date.day, date.month.substring(0,3)]);
+    		dateString = Lang.format("$1$ $2$", [date.day, date.month.substring(0,3)]);
     	}
     	dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);
         dc.drawText(cx, y, Gfx.FONT_SMALL, dateString, Gfx.TEXT_JUSTIFY_CENTER);
