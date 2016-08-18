@@ -4,6 +4,7 @@ using Toybox.Activity as Act;
 using Toybox.System as Sys;
 using Toybox.Graphics as Gfx;
 using Toybox.Application as App;
+using Toybox.Time;
 
 class WatchFaceView extends Ui.WatchFace{
 	hidden var cx;
@@ -29,6 +30,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var step_icon_black;
 	hidden var distance_icon_white;
 	hidden var distance_icon_black;
+	hidden var change_color;
+	hidden var time_color;
 		
 	function initialize() {
         WatchFace.initialize();
@@ -125,7 +128,7 @@ class WatchFaceView extends Ui.WatchFace{
     		text_color=Gfx.COLOR_BLACK;
     	}
     	
-    	var shade_color = getColorShade();
+    	var shade_color = getColorShade(moment);
         dc.clear();
 		
         drawHour(dc,info_date,shade_color,info_bottom,active&&display_second);
@@ -259,8 +262,23 @@ class WatchFaceView extends Ui.WatchFace{
 		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
     }
     
-    function getColorShade(){
+    function getColorShade(moment){
         var shade_color =  App.getApp().getProperty("shade_color");
+        if(shade_color == 13){
+        	var minute_change_color =  App.getApp().getProperty("minute_change_color");
+        	var duration = new Time.Duration.initialize(minute_change_color*60);
+       		if(time_color == null || moment.greaterThan(time_color.add(duration))){
+        		var color = Math.rand()%11+1;
+        		while(color == change_color){
+        			color = Math.rand()%11+1;
+        		}
+        		change_color = color;		
+        		shade_color = change_color;
+        		time_color=moment;
+        	}else{
+        		shade_color = change_color;
+        	}
+        }
 		if (shade_color == 1) {
         	return Gfx.COLOR_BLUE;
         }else if (shade_color == 2) {
