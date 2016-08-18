@@ -81,17 +81,41 @@ class WatchFaceView extends Ui.WatchFace{
     }
     
     function onUpdate(dc) {
+    	//Property
     	var arc_type =  App.getApp().getProperty("arc_type");
     	var info_top = App.getApp().getProperty("info_top");
     	var info_bottom = App.getApp().getProperty("info_bottom");
     	var display_second = App.getApp().getProperty("second_display");
     	var date_type =  App.getApp().getProperty("date_type");
-    	
-    	var battery = Sys.getSystemStats().battery;
     	var battery_low =  App.getApp().getProperty("battery_low");
-    	
     	var battery_percentage = App.getApp().getProperty("battery_percentage");
+    	var battery_profile = App.getApp().getProperty("battery_profile");
+    	var altitude_profile = App.getApp().getProperty("altitude_profile");
+    	var altitude_step =  App.getApp().getProperty("altitude_step");
+    	//Battery
+    	var battery = Sys.getSystemStats().battery;
+    	//Hour
+        var moment = Time.now();
+        var info_date = Gregorian.info(moment, Time.FORMAT_MEDIUM);
+        //Altimeter
+        var altitude = 0;
+
+        var actInfo = Act.getActivityInfo();
+		if (actInfo != null && actInfo.altitude != null) {
+			altitude = actInfo.altitude;
+			var metric = Sys.getDeviceSettings().elevationUnits;
+			if (metric==Sys.UNIT_STATUTE) {
+				altitude = altitude*3.38;
+			}				
+		}
     	
+    	if(battery_profile && battery<=battery_low){
+    		info_top=1;
+    	}
+    	if(altitude_profile && altitude>altitude_step){
+			info_bottom=0;
+		}
+    	   	
     	var bgk_color = getBackgroundColor();
     	dc.setColor(bgk_color,bgk_color);
     	
@@ -103,10 +127,7 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	var shade_color = getColorShade();
         dc.clear();
-
-        var moment = Time.now();
-        var info_date = Gregorian.info(moment, Time.FORMAT_MEDIUM);
-        
+		
         drawHour(dc,info_date,shade_color,info_bottom,active&&display_second);
     
 		var y;
@@ -148,7 +169,7 @@ class WatchFaceView extends Ui.WatchFace{
 		
 			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
 		}
-		
+				
 		
 		if(info_bottom == 0){
 			if(arc_type==3){
@@ -157,7 +178,7 @@ class WatchFaceView extends Ui.WatchFace{
 				y = 185;
 			}
 			var x = 40;
-       		Altimeter.draw(dc,x,y,text_color,text_color,shade_color);	
+       		Altimeter.draw(dc,altitude,x,y,text_color,text_color,shade_color);	
 		}else if( info_bottom == 1){
 			y = cy+text_height_hour/2;
 			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
@@ -207,7 +228,8 @@ class WatchFaceView extends Ui.WatchFace{
         	}else if (arc_type == 2) {
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
-       	}       	
+       	} 
+       	      	
     }
             
     function drawHour(dc,info_date,shade_color,info_bottom,display_second){
@@ -219,7 +241,7 @@ class WatchFaceView extends Ui.WatchFace{
         }
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || (info_date.hour-12)>=10 ||info_date.hour==0){
+        if(settings.is24Hour || (info_date.hour-10)>=0 ||info_date.hour==0){
         	text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;

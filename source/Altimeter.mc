@@ -5,21 +5,16 @@ using Toybox.Lang;
 
 module Altimeter{
 
-	function draw(dc,x,y,text_color,mountain_color,bgk_color){
-	    var actaltitude = 0;
+	function draw(dc,altitude,x,y,text_color,mountain_color,bgk_color){
 		var altitudeStr;
     
     	drawMountain(dc,x,y,mountain_color,bgk_color);
     	
-        var actInfo = Act.getActivityInfo();
-		if (actInfo != null && actInfo.altitude != null) {
-			actaltitude = actInfo.altitude;				
-		}
 		var metric = Sys.getDeviceSettings().elevationUnits;
 		if (metric==Sys.UNIT_METRIC) {
-			altitudeStr = Lang.format("$1$m", [actaltitude.format("%d")]);
+			altitudeStr = Lang.format("$1$m", [altitude.format("%d")]);
 		} else {
-			altitudeStr = Lang.format("$1$ft", [actaltitude.format("%d")]);
+			altitudeStr = Lang.format("$1$ft", [altitude.format("%d")]);
 		}
 		var text_width = dc.getTextWidthInPixels(altitudeStr,Gfx.FONT_MEDIUM);
 		dc.setColor(text_color, Gfx.COLOR_TRANSPARENT);

@@ -12,6 +12,9 @@
         <property id="arc_width" type="number">4</property>
         <property id="battery_low" type="number">15</property>
         <property id="battery_percentage" type="boolean">false</property>
+        <property id="battery_profile" type="boolean">false</property>
+        <property id="altitude_profile" type="boolean">false</property>
+        <property id="altitude_step" type="number">1000</property>
     </properties>
 
 
@@ -46,6 +49,7 @@
             <settingConfig type="list">
             	<listEntry value="0">@Strings.date_type_day</listEntry>
             	<listEntry value="1">@Strings.date_type_day_month</listEntry>
+            	<listEntry value="2">@Strings.date_type_month</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
@@ -104,6 +108,15 @@
         </setting>
         <setting propertyKey="@Properties.battery_percentage" title="@Strings.battery_percentage_title">
             <settingConfig type="boolean" />
-        </setting> 
+        </setting>
+        <setting propertyKey="@Properties.battery_profile" title="@Strings.battery_profile_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.altitude_profile" title="@Strings.altitude_profile_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.altitude_step" title="@Strings.altitude_step_title" prompt="@Strings.altitude_step_title">
+            <settingConfig type="numeric" min="0" max="10000" />
+        </setting>  
     </settings>
 </resources>
