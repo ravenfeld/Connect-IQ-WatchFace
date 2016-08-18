@@ -7,6 +7,7 @@
         <property id="date_type" type="number">0</property>
         <property id="bgk_color" type="number">0</property>
         <property id="shade_color" type="number">0</property>
+        <property id="minute_change_color" type="number">1</property>
         <property id="arc_type" type="number">0</property>
         <property id="arc_color" type="number">0</property>
         <property id="arc_width" type="number">4</property>
@@ -73,8 +74,12 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.color_random</listEntry>
             </settingConfig>
-        </setting>
+        </setting>        
+        <setting propertyKey="@Properties.minute_change_color" title="@Strings.minute_change_color_title" prompt="@Strings.minute_change_color_title">
+            <settingConfig type="numeric" min="1" max="1440" />
+        </setting> 
         <setting propertyKey="@Properties.arc_type" title="@Strings.arc_type_title">
             <settingConfig type="list">
             	<listEntry value="0">@Strings.battery</listEntry>

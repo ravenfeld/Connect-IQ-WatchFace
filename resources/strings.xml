@@ -27,6 +27,8 @@
     <string id="color_white">White</string>
     <string id="color_black">Black</string>
     <string id="color_yellow">Yellow</string>
+    <string id="color_random">Random</string>
+    <string id="minute_change_color_title">Minute for the changing shade color</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Color arc</string>
     <string id="arc_width_title">Width arc</string>
