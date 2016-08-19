@@ -99,7 +99,7 @@ class WatchFaceView extends Ui.WatchFace{
     	var battery = Sys.getSystemStats().battery;
     	//Hour
         var moment = Time.now();
-        var info_date = Gregorian.info(moment, Time.FORMAT_MEDIUM);
+        var info_date = Gregorian.info(moment, Time.FORMAT_LONG);
         //Altimeter
         var altitude = 0;
 
