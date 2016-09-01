@@ -29,8 +29,6 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var distance_icon_black;
 	hidden var heart_icon_white;
 	hidden var heart_icon_black;
-	hidden var sunset_icon_white;
-	hidden var sunset_icon_black;
 	hidden var sunrise_icon_white;
 	hidden var sunrise_icon_black;
 	hidden var change_color;
@@ -67,10 +65,7 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	heart_icon_white = Ui.loadResource(Rez.Drawables.HeartIconWhite);
     	heart_icon_black = Ui.loadResource(Rez.Drawables.HeartIconBlack);
-    	
-    	sunset_icon_white = Ui.loadResource(Rez.Drawables.SunsetIconWhite);
-    	sunset_icon_black = Ui.loadResource(Rez.Drawables.SunsetIconBlack);
-    	
+    	    	
     	sunrise_icon_white = Ui.loadResource(Rez.Drawables.SunriseIconWhite);
     	sunrise_icon_black = Ui.loadResource(Rez.Drawables.SunriseIconBlack);
     }
@@ -132,12 +127,14 @@ class WatchFaceView extends Ui.WatchFace{
 				heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
     		}
     	}
+    	    	
     	//sunset or sunrise
     	if(actInfo.currentLocation!=null && (info_top == 7 || info_bottom == 8)){
     		lastLoc = actInfo.currentLocation.toRadians();
     		var sunrise_moment = getMoment(moment,SUNRISE);
     		var sunset_moment = getMoment(moment,SUNSET);
-    		if(moment.greaterThan(sunset_moment)){
+
+    		if(moment.greaterThan(sunset_moment) || moment.lessThan(sunrise_moment)){
     			sunset_sunrise = momentToString(sunrise_moment);
     			sunset=false;
     		}else{
@@ -222,13 +219,13 @@ class WatchFaceView extends Ui.WatchFace{
 			var sun_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				if(sunset){
-					sun_icon = sunset_icon_white;
+					sun_icon = MoonPhase.getIconSunsetWhite(moment);
 				}else{
 					sun_icon = sunrise_icon_white;
 				}
 			}else{
 				if(sunset){
-					sun_icon = sunset_icon_black;
+					sun_icon = MoonPhase.getIconSunsetBlack(moment);
 				}else{
 					sun_icon = sunrise_icon_black;
 				}
@@ -298,13 +295,13 @@ class WatchFaceView extends Ui.WatchFace{
 			var sun_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				if(sunset){
-					sun_icon = sunset_icon_white;
+					sun_icon = MoonPhase.getIconSunsetWhite(moment);
 				}else{
 					sun_icon = sunrise_icon_white;
 				}
 			}else{
 				if(sunset){
-					sun_icon = sunset_icon_black;
+					sun_icon = MoonPhase.getIconSunsetBlack(moment);
 				}else{
 					sun_icon = sunrise_icon_black;
 				}
@@ -459,5 +456,5 @@ class WatchFaceView extends Ui.WatchFace{
 
 		return text;
 	}
-   
+  
 }
