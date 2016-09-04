@@ -31,7 +31,8 @@
             	<listEntry value="3">@Strings.calorie</listEntry>
             	<listEntry value="4">@Strings.step</listEntry>
             	<listEntry value="5">@Strings.distance</listEntry>
-            	<listEntry value="6">@Strings.none</listEntry>
+            	<listEntry value="6">@Strings.heart_rate</listEntry>
+            	<listEntry value="7">@Strings.none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.info_bottom" title="@Strings.info_bottom_title" prompt="@Strings.info_bottom_title">
@@ -43,7 +44,8 @@
             	<listEntry value="4">@Strings.calorie</listEntry>
             	<listEntry value="5">@Strings.step</listEntry>
             	<listEntry value="6">@Strings.distance</listEntry>
-            	<listEntry value="7">@Strings.none</listEntry>
+            	<listEntry value="7">@Strings.heart_rate</listEntry>
+            	<listEntry value="8">@Strings.none</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.date_type" title="@Strings.date_type_title">

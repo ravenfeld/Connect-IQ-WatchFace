@@ -29,5 +29,15 @@
         <palette disableTransparency="false">
             <color>000000</color>
         </palette>
+    </bitmap> 
+    <bitmap id="HeartIconWhite" filename="heart_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
     </bitmap>    
+    <bitmap id="HeartIconBlack" filename="heart_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>000000</color>
+        </palette>
+    </bitmap>   
 </drawables>

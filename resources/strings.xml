@@ -10,6 +10,7 @@
     <string id="calorie">Calorie</string>
     <string id="step">Step</string>
     <string id="distance">Distance</string>
+    <string id="heart_rate">Heart Rate</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>

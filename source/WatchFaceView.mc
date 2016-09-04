@@ -30,6 +30,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var step_icon_black;
 	hidden var distance_icon_white;
 	hidden var distance_icon_black;
+	hidden var heart_icon_white;
+	hidden var heart_icon_black;
 	hidden var change_color;
 	hidden var time_color;
 		
@@ -56,6 +58,9 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	distance_icon_white = Ui.loadResource(Rez.Drawables.DistanceIconWhite);
     	distance_icon_black = Ui.loadResource(Rez.Drawables.DistanceIconBlack);
+    	
+    	heart_icon_white = Ui.loadResource(Rez.Drawables.HeartIconWhite);
+    	heart_icon_black = Ui.loadResource(Rez.Drawables.HeartIconBlack);
     }
     
     function onHide(){
@@ -84,6 +89,7 @@ class WatchFaceView extends Ui.WatchFace{
     }
     
     function onUpdate(dc) {
+    	var actInfo = Act.getActivityInfo();
     	//Property
     	var arc_type =  App.getApp().getProperty("arc_type");
     	var info_top = App.getApp().getProperty("info_top");
@@ -102,14 +108,18 @@ class WatchFaceView extends Ui.WatchFace{
         var info_date = Gregorian.info(moment, Time.FORMAT_LONG);
         //Altimeter
         var altitude = 0;
-
-        var actInfo = Act.getActivityInfo();
+        
 		if (actInfo != null && actInfo.altitude != null) {
 			altitude = actInfo.altitude;
 			var metric = Sys.getDeviceSettings().elevationUnits;
 			if (metric==Sys.UNIT_STATUTE) {
 				altitude = altitude*3.38;
 			}				
+		}
+    	//hr
+    	var heart_rate = 0;
+    	if (actInfo != null && actInfo.currentHeartRate != null) {
+			heart_rate = actInfo.currentHeartRate;			
 		}
     	
     	if(battery_profile && battery<=battery_low){
@@ -171,6 +181,16 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 		
 			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
+		}else if(info_top == 6){
+			y = cy-text_height_hour/2-15;
+			var heart_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				heart_icon = heart_icon_white;
+			}else{
+				heart_icon = heart_icon_black;
+			}
+		
+			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
 		}
 				
 		
@@ -219,6 +239,16 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 			
 			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
+		}else if(info_bottom == 7){
+			y = cy+text_height_hour/2+20;
+			var heart_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				heart_icon = heart_icon_white;
+			}else{
+				heart_icon = heart_icon_black;
+			}
+		
+			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
 		}
 		
 		if(arc_type<3){
