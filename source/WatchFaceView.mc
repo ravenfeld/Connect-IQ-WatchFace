@@ -34,6 +34,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var heart_icon_black;
 	hidden var change_color;
 	hidden var time_color;
+	hidden var altitude = 0;
+	hidden var heart_rate = 0;
 		
 	function initialize() {
         WatchFace.initialize();
@@ -107,7 +109,6 @@ class WatchFaceView extends Ui.WatchFace{
         var moment = Time.now();
         var info_date = Gregorian.info(moment, Time.FORMAT_LONG);
         //Altimeter
-        var altitude = 0;
         
 		if (actInfo != null && actInfo.altitude != null) {
 			altitude = actInfo.altitude;
@@ -117,10 +118,9 @@ class WatchFaceView extends Ui.WatchFace{
 			}				
 		}
     	//hr
-    	var heart_rate = 0;
-    	if (actInfo != null && actInfo.currentHeartRate != null) {
-			heart_rate = actInfo.currentHeartRate;			
-		}
+    	var hrIter = ActivityMonitor.getHeartRateHistory(null, true);
+        var hr = hrIter.next();
+		heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
     	
     	if(battery_profile && battery<=battery_low){
     		info_top=1;
