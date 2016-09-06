@@ -165,7 +165,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				calorie_icon = calorie_icon_black;
 			}
-			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+			Utils.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}else if(info_top == 4){
 			y = cy-text_height_hour/2-15;
 			var step_icon;
@@ -174,7 +174,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				step_icon = step_icon_black;
 			}
-			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
+			Utils.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}else if(info_top == 5){
 			y = cy-text_height_hour/2-15;
 			var distance_icon;
@@ -223,7 +223,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				calorie_icon = calorie_icon_black;
 			}
-			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
+			Utils.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}else if(info_bottom == 5){
 			y = cy+text_height_hour/2+20;
 			var step_icon;
@@ -232,7 +232,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}else{
 				step_icon = step_icon_black;
 			}
-			InfoMonitor.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
+			Utils.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}else if(info_bottom == 6){
 			y = cy+text_height_hour/2+20;
 			var distance_icon;
