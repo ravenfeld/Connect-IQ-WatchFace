@@ -118,9 +118,13 @@ class WatchFaceView extends Ui.WatchFace{
 			}				
 		}
     	//hr
-    	var hrIter = ActivityMonitor.getHeartRateHistory(null, true);
-        var hr = hrIter.next();
-		heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
+		if(info_top == 6 || info_bottom == 7){
+    		var hrIter = ActivityMonitor.getHeartRateHistory(null, true);
+        	if(hrIter != null){
+        		var hr = hrIter.next();
+				heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
+    		}
+    	}
     	
     	if(battery_profile && battery<=battery_low){
     		info_top=1;
