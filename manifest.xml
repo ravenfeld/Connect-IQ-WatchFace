@@ -11,6 +11,7 @@
         <iq:permissions/>
 
         <iq:languages>
+            <iq:language>deu</iq:language>
             <iq:language>fre</iq:language>
         </iq:languages>
 
