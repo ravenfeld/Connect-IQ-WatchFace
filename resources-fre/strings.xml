@@ -11,6 +11,7 @@
     <string id="step">Pas</string>
     <string id="distance">Distance</string>
     <string id="heart_rate">Fréquence cardiaque (Fenix 3 HR)</string>
+    <string id="sunset_sunrise">Couché/Levé du soleil</string>
     <string id="shade_color_title">Couleur de la nuance</string>
     <string id="bgk_color_title">Couleur d'arrière plan</string>
 	<string id="color_default">Défaut</string>

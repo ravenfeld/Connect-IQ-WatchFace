@@ -39,5 +39,25 @@
         <palette disableTransparency="false">
             <color>000000</color>
         </palette>
-    </bitmap>   
+    </bitmap>
+    <bitmap id="SunsetIconWhite" filename="sunset_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>    
+    <bitmap id="SunsetIconBlack" filename="sunset_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>000000</color>
+        </palette>
+    </bitmap> 
+    <bitmap id="SunriseIconWhite" filename="sunrise_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>    
+    <bitmap id="SunriseIconBlack" filename="sunrise_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>000000</color>
+        </palette>
+    </bitmap>      
 </drawables>

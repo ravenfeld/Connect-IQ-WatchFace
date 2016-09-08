@@ -29,10 +29,17 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var distance_icon_black;
 	hidden var heart_icon_white;
 	hidden var heart_icon_black;
+	hidden var sunset_icon_white;
+	hidden var sunset_icon_black;
+	hidden var sunrise_icon_white;
+	hidden var sunrise_icon_black;
 	hidden var change_color;
 	hidden var time_color;
 	hidden var altitude = 0;
 	hidden var heart_rate = 0;
+	hidden var lastLoc;
+	hidden var sunset_sunrise;
+	hidden var sunset;
 		
 	function initialize() {
         WatchFace.initialize();
@@ -60,6 +67,12 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	heart_icon_white = Ui.loadResource(Rez.Drawables.HeartIconWhite);
     	heart_icon_black = Ui.loadResource(Rez.Drawables.HeartIconBlack);
+    	
+    	sunset_icon_white = Ui.loadResource(Rez.Drawables.SunsetIconWhite);
+    	sunset_icon_black = Ui.loadResource(Rez.Drawables.SunsetIconBlack);
+    	
+    	sunrise_icon_white = Ui.loadResource(Rez.Drawables.SunriseIconWhite);
+    	sunrise_icon_black = Ui.loadResource(Rez.Drawables.SunriseIconBlack);
     }
     
     function onHide(){
@@ -118,6 +131,21 @@ class WatchFaceView extends Ui.WatchFace{
         		var hr = hrIter.next();
 				heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
     		}
+    	}
+    	//sunset or sunrise
+    	if(actInfo.currentLocation!=null && (info_top == 7 || info_bottom == 8)){
+    		lastLoc = actInfo.currentLocation.toRadians();
+    		var sunrise_moment = getMoment(moment,SUNRISE);
+    		var sunset_moment = getMoment(moment,SUNSET);
+    		if(moment.greaterThan(sunset_moment)){
+    			sunset_sunrise = momentToString(sunrise_moment);
+    			sunset=false;
+    		}else{
+    			sunset_sunrise = momentToString(sunset_moment);
+    			sunset=true;
+    		}	
+    	}else{
+    		sunset_sunrise = Ui.loadResource(Rez.Strings.none);
     	}
     	
     	if(battery_profile && battery<=battery_low){
@@ -189,6 +217,24 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
+		}else if(info_top == 7){
+			y = cy-text_height_hour/2-15;
+			var sun_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				if(sunset){
+					sun_icon = sunset_icon_white;
+				}else{
+					sun_icon = sunrise_icon_white;
+				}
+			}else{
+				if(sunset){
+					sun_icon = sunset_icon_black;
+				}else{
+					sun_icon = sunrise_icon_black;
+				}
+			}
+		
+			Utils.drawIconText(dc,sunset_sunrise,cx,y,text_color,sun_icon);
 		}
 				
 		
@@ -247,6 +293,24 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
+		}else if(info_bottom == 8){
+			y = cy+text_height_hour/2+20;
+			var sun_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				if(sunset){
+					sun_icon = sunset_icon_white;
+				}else{
+					sun_icon = sunrise_icon_white;
+				}
+			}else{
+				if(sunset){
+					sun_icon = sunset_icon_black;
+				}else{
+					sun_icon = sunrise_icon_black;
+				}
+			}
+		
+			Utils.drawIconText(dc,sunset_sunrise,cx,y,text_color,sun_icon);
 		}
 		
 		if(arc_type<3){
@@ -364,5 +428,36 @@ class WatchFaceView extends Ui.WatchFace{
         }
         return text_color;
     }
+    
+    function getMoment(now,what) {
+		return SunCalc.calculate(now, lastLoc[0], lastLoc[1], what);
+	}
+	
+	function momentToString(moment) {
+
+		if (moment == null) {
+			return "--:--";
+		}
+
+   		var tinfo = Time.Gregorian.info(new Time.Moment(moment.value() + 30), Time.FORMAT_SHORT);
+		var text;
+		if (settings.is24Hour) {
+			text = tinfo.hour.format("%02d") + ":" + tinfo.min.format("%02d");
+		} else {
+			var hour = tinfo.hour % 12;
+			if (hour == 0) {
+				hour = 12;
+			}
+			text = hour.format("%02d") + ":" + tinfo.min.format("%02d");
+			
+			if (tinfo.hour < 12 || tinfo.hour == 24) {
+				text = text + " AM";
+			} else {
+				text = text + " PM";
+			}
+		}
+
+		return text;
+	}
    
 }

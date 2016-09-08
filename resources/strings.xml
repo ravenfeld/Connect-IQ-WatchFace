@@ -11,6 +11,7 @@
     <string id="step">Step</string>
     <string id="distance">Distance</string>
     <string id="heart_rate">Heart rate (Fenix 3 HR)</string>
+    <string id="sunset_sunrise">Sunset/Sunrise</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>
