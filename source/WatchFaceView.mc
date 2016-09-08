@@ -12,7 +12,6 @@ class WatchFaceView extends Ui.WatchFace{
     hidden var settings;
     hidden var active;
     hidden var text_width_hour_10;
-    hidden var text_width_hour_1;
     hidden var text_width_point;
 	hidden var text_width_minute;
 	hidden var text_width_second;
@@ -20,9 +19,7 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var text_height_second;
 	hidden var text_y_second;
 	hidden var start_x_active_hour_10;
-	hidden var start_x_active_hour_1;
 	hidden var start_x_sleep_hour_10;
-	hidden var start_x_sleep_hour_1;
 	hidden var text_color;
 	hidden var calorie_icon_white;
 	hidden var calorie_icon_black;
@@ -76,7 +73,6 @@ class WatchFaceView extends Ui.WatchFace{
         cy = dc.getHeight() / 2;
         
         text_width_hour_10 = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
-        text_width_hour_1 = dc.getTextWidthInPixels("8",Gfx.FONT_NUMBER_THAI_HOT);
         text_width_point = dc.getTextWidthInPixels(":",Gfx.FONT_NUMBER_THAI_HOT);
         text_height_hour = dc.getFontHeight(Gfx.FONT_NUMBER_THAI_HOT);
         text_width_minute = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
@@ -84,9 +80,7 @@ class WatchFaceView extends Ui.WatchFace{
         text_height_second = dc.getFontHeight(Gfx.FONT_NUMBER_MEDIUM);
         
         start_x_active_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+text_width_second+8))/2;
-        start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
-        start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
    
     }
     
@@ -278,21 +272,12 @@ class WatchFaceView extends Ui.WatchFace{
         }
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || (info_date.hour-12>=10 || (info_date.hour-12<=0 && info_date.hour-10>=0) ||info_date.hour==0)){
-        	text_width_hour = text_width_hour_10;
+        text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;
         	}else{
         		start_x=start_x_sleep_hour_10;
         	}
-        }else{
-        	text_width_hour = text_width_hour_1;
-            if(active){
-        		start_x=start_x_active_hour_1;
-        	}else{
-        		start_x=start_x_sleep_hour_1;
-        	}
-        }
 		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
     }
     

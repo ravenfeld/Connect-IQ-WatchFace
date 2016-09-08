@@ -6,16 +6,15 @@ module Date{
 		var hour;
         if (is24Hour) {
             hour = date.hour;
-        } else if (date.hour > 12) {
-            hour = date.hour - 12;
-        } else if (date.hour == 0) {
-            hour = 12;
         } else {
-            hour = date.hour;
+        	hour = date.hour%12;
+        	if(hour==0){
+        		hour=12;
+        	}
         }
         
         var hourString;
-        if (is24Hour && hour < 10) {
+        if (hour < 10) {
             hourString = Lang.format("0$1$", [hour]);   
         } else {
             hourString = Lang.format("$1$", [hour]);
