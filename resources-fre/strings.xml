@@ -33,6 +33,7 @@
     <string id="minute_change_color_title">Nombre de minute entre le changement de la nuance</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Couleur de l'arc</string>
+    <string id="arc_color_goal_title">Couleur de l'arc complet</string>
     <string id="arc_width_title">Épaisseur de l'arc</string>
 	<string id="activity">Niveau d'activité</string>
 	<string id="none">Aucun</string>

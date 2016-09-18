@@ -14,12 +14,17 @@ module InfoMonitor{
        	}
 	}
 	
-	function drawArcStep(dc,steps,stepGoal,x,y,color,arc_width){
+	function drawArcStep(dc,steps,stepGoal,x,y,color,colorGoal,arc_width){
 	    var angle_step = steps*360/stepGoal;
-	   	dc.setPenWidth(arc_width);
-		dc.setColor(color,Gfx.COLOR_TRANSPARENT);
-
-    	if(angle_step>0){
+	
+		if(steps>=stepGoal){
+			dc.setPenWidth(arc_width);
+			dc.setColor(colorGoal,Gfx.COLOR_TRANSPARENT);
+			dc.drawArc(x,y,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,90);
+		}
+		if( steps!=stepGoal && angle_step>0){
+			dc.setPenWidth(arc_width+1);
+			dc.setColor(color,Gfx.COLOR_TRANSPARENT);
        		dc.drawArc(x,y,dc.getHeight()/2-1,Gfx.ARC_CLOCKWISE,90,(360-angle_step.toLong()+90)%360);   
        	}
 	}

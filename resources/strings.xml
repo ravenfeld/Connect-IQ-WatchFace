@@ -33,6 +33,7 @@
     <string id="minute_change_color_title">Minute for the changing shade color</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Color arc</string>
+    <string id="arc_color_goal_title">Color completed arc</string>
     <string id="arc_width_title">Width arc</string>
 	<string id="activity">Level activity</string>
 	<string id="none">None</string>

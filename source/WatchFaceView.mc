@@ -316,7 +316,7 @@ class WatchFaceView extends Ui.WatchFace{
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
-        		InfoMonitor.drawArcStep(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
+        		InfoMonitor.drawArcStep(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),getColorArcGoal(),arc_width);
         	}else if (arc_type == 2) {
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
@@ -424,6 +424,36 @@ class WatchFaceView extends Ui.WatchFace{
         	return Gfx.COLOR_YELLOW;
         }
         return text_color;
+    }
+    
+    function getColorArcGoal(){
+        var arc_color =  App.getApp().getProperty("arc_color_goal");
+        if (arc_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (arc_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (arc_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (arc_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (arc_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (arc_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (arc_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (arc_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (arc_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (arc_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (arc_color == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return Gfx.COLOR_GREEN;
     }
     
     function getMoment(now,what) {
