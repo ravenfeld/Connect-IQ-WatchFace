@@ -11,6 +11,7 @@
     <string id="step">Step</string>
     <string id="distance">Distance</string>
     <string id="heart_rate">Heart rate (Fenix 3 HR)</string>
+    <string id="sunset_sunrise">Sunset/Sunrise</string>
     <string id="shade_color_title">Shade color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>
@@ -32,6 +33,7 @@
     <string id="minute_change_color_title">Minute for the changing shade color</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Color arc</string>
+    <string id="arc_color_goal_title">Color completed arc</string>
     <string id="arc_width_title">Width arc</string>
 	<string id="activity">Level activity</string>
 	<string id="none">None</string>

@@ -12,7 +12,6 @@ class WatchFaceView extends Ui.WatchFace{
     hidden var settings;
     hidden var active;
     hidden var text_width_hour_10;
-    hidden var text_width_hour_1;
     hidden var text_width_point;
 	hidden var text_width_minute;
 	hidden var text_width_second;
@@ -20,9 +19,7 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var text_height_second;
 	hidden var text_y_second;
 	hidden var start_x_active_hour_10;
-	hidden var start_x_active_hour_1;
 	hidden var start_x_sleep_hour_10;
-	hidden var start_x_sleep_hour_1;
 	hidden var text_color;
 	hidden var calorie_icon_white;
 	hidden var calorie_icon_black;
@@ -32,10 +29,15 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var distance_icon_black;
 	hidden var heart_icon_white;
 	hidden var heart_icon_black;
+	hidden var sunrise_icon_white;
+	hidden var sunrise_icon_black;
 	hidden var change_color;
 	hidden var time_color;
 	hidden var altitude = 0;
 	hidden var heart_rate = 0;
+	hidden var lastLoc;
+	hidden var sunset_sunrise;
+	hidden var sunset;
 		
 	function initialize() {
         WatchFace.initialize();
@@ -63,6 +65,9 @@ class WatchFaceView extends Ui.WatchFace{
     	
     	heart_icon_white = Ui.loadResource(Rez.Drawables.HeartIconWhite);
     	heart_icon_black = Ui.loadResource(Rez.Drawables.HeartIconBlack);
+    	    	
+    	sunrise_icon_white = Ui.loadResource(Rez.Drawables.SunriseIconWhite);
+    	sunrise_icon_black = Ui.loadResource(Rez.Drawables.SunriseIconBlack);
     }
     
     function onHide(){
@@ -76,7 +81,6 @@ class WatchFaceView extends Ui.WatchFace{
         cy = dc.getHeight() / 2;
         
         text_width_hour_10 = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
-        text_width_hour_1 = dc.getTextWidthInPixels("8",Gfx.FONT_NUMBER_THAI_HOT);
         text_width_point = dc.getTextWidthInPixels(":",Gfx.FONT_NUMBER_THAI_HOT);
         text_height_hour = dc.getFontHeight(Gfx.FONT_NUMBER_THAI_HOT);
         text_width_minute = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
@@ -84,9 +88,7 @@ class WatchFaceView extends Ui.WatchFace{
         text_height_second = dc.getFontHeight(Gfx.FONT_NUMBER_MEDIUM);
         
         start_x_active_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+text_width_second+8))/2;
-        start_x_active_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+text_width_second+8))/2;
         start_x_sleep_hour_10=(dc.getWidth()-(text_width_hour_10+text_width_point+text_width_minute+4))/2;
-        start_x_sleep_hour_1=(dc.getWidth()-(text_width_hour_1+text_width_point+text_width_minute+4))/2;
    
     }
     
@@ -124,6 +126,23 @@ class WatchFaceView extends Ui.WatchFace{
         		var hr = hrIter.next();
 				heart_rate = (hr.heartRate != ActivityMonitor.INVALID_HR_SAMPLE && hr.heartRate > 0) ? hr.heartRate : 0; 		
     		}
+    	}
+    	    	
+    	//sunset or sunrise
+    	if(actInfo.currentLocation!=null && (info_top == 7 || info_bottom == 8)){
+    		lastLoc = actInfo.currentLocation.toRadians();
+    		var sunrise_moment = getMoment(moment,SUNRISE);
+    		var sunset_moment = getMoment(moment,SUNSET);
+
+    		if(moment.greaterThan(sunset_moment) || moment.lessThan(sunrise_moment)){
+    			sunset_sunrise = momentToString(sunrise_moment);
+    			sunset=false;
+    		}else{
+    			sunset_sunrise = momentToString(sunset_moment);
+    			sunset=true;
+    		}	
+    	}else{
+    		sunset_sunrise = Ui.loadResource(Rez.Strings.none);
     	}
     	
     	if(battery_profile && battery<=battery_low){
@@ -195,6 +214,24 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
+		}else if(info_top == 7){
+			y = cy-text_height_hour/2-15;
+			var sun_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				if(sunset){
+					sun_icon = MoonPhase.getIconSunsetWhite(moment);
+				}else{
+					sun_icon = sunrise_icon_white;
+				}
+			}else{
+				if(sunset){
+					sun_icon = MoonPhase.getIconSunsetBlack(moment);
+				}else{
+					sun_icon = sunrise_icon_black;
+				}
+			}
+		
+			Utils.drawIconText(dc,sunset_sunrise,cx,y,text_color,sun_icon);
 		}
 				
 		
@@ -253,6 +290,24 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
+		}else if(info_bottom == 8){
+			y = cy+text_height_hour/2+20;
+			var sun_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				if(sunset){
+					sun_icon = MoonPhase.getIconSunsetWhite(moment);
+				}else{
+					sun_icon = sunrise_icon_white;
+				}
+			}else{
+				if(sunset){
+					sun_icon = MoonPhase.getIconSunsetBlack(moment);
+				}else{
+					sun_icon = sunrise_icon_black;
+				}
+			}
+		
+			Utils.drawIconText(dc,sunset_sunrise,cx,y,text_color,sun_icon);
 		}
 		
 		if(arc_type<3){
@@ -261,7 +316,7 @@ class WatchFaceView extends Ui.WatchFace{
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
-        		InfoMonitor.drawArcStep(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),arc_width);
+        		InfoMonitor.drawArcStep(dc,ActivityMonitor.getInfo().steps,ActivityMonitor.getInfo().stepGoal,cx,cy,getColorArc(),getColorArcGoal(),arc_width);
         	}else if (arc_type == 2) {
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
@@ -278,21 +333,12 @@ class WatchFaceView extends Ui.WatchFace{
         }
         var text_width_hour;
         var start_x;
-        if(settings.is24Hour || (info_date.hour-12>=10 || (info_date.hour-12<=0 && info_date.hour-10>=0) ||info_date.hour==0)){
-        	text_width_hour = text_width_hour_10;
+        text_width_hour = text_width_hour_10;
         	if(active){
         		start_x=start_x_active_hour_10;
         	}else{
         		start_x=start_x_sleep_hour_10;
         	}
-        }else{
-        	text_width_hour = text_width_hour_1;
-            if(active){
-        		start_x=start_x_active_hour_1;
-        	}else{
-        		start_x=start_x_sleep_hour_1;
-        	}
-        }
 		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
     }
     
@@ -379,5 +425,66 @@ class WatchFaceView extends Ui.WatchFace{
         }
         return text_color;
     }
-   
+    
+    function getColorArcGoal(){
+        var arc_color =  App.getApp().getProperty("arc_color_goal");
+        if (arc_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (arc_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (arc_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (arc_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (arc_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (arc_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (arc_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (arc_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (arc_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (arc_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (arc_color == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return Gfx.COLOR_GREEN;
+    }
+    
+    function getMoment(now,what) {
+		return SunCalc.calculate(now, lastLoc[0], lastLoc[1], what);
+	}
+	
+	function momentToString(moment) {
+
+		if (moment == null) {
+			return "--:--";
+		}
+
+   		var tinfo = Time.Gregorian.info(new Time.Moment(moment.value() + 30), Time.FORMAT_SHORT);
+		var text;
+		if (settings.is24Hour) {
+			text = tinfo.hour.format("%02d") + ":" + tinfo.min.format("%02d");
+		} else {
+			var hour = tinfo.hour % 12;
+			if (hour == 0) {
+				hour = 12;
+			}
+			text = hour.format("%02d") + ":" + tinfo.min.format("%02d");
+			
+			if (tinfo.hour < 12 || tinfo.hour == 24) {
+				text = text + " AM";
+			} else {
+				text = text + " PM";
+			}
+		}
+
+		return text;
+	}
+  
 }
