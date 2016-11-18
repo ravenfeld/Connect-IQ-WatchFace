@@ -121,7 +121,7 @@ class WatchFaceView extends Ui.WatchFace{
 		}
     	//hr
 		if(info_top == 6 || info_bottom == 7){
-			if(ActivityMonitor has HeartRateIterator) {
+			if(ActivityMonitor has :HeartRateIterator) {
     			var hrIter = ActivityMonitor.getHeartRateHistory(null, true);
         		if(hrIter != null){
         			var hr = hrIter.next();
