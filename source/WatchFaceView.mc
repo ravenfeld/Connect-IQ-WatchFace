@@ -349,7 +349,7 @@ class WatchFaceView extends Ui.WatchFace{
         if(shade_color == 13){
         	var minute_change_color =  App.getApp().getProperty("minute_change_color");
         	var duration = new Time.Duration.initialize(minute_change_color*60);
-       		if(time_color == null || moment.greaterThan(time_color.add(duration))){
+       		if(time_color == null || moment.compare(time_color.add(duration))>=0){
         		var color = Math.rand()%11+1;
         		while(color == change_color){
         			color = Math.rand()%11+1;
