@@ -7,6 +7,9 @@
         <property id="date_type" type="number">0</property>
         <property id="bgk_color" type="number">0</property>
         <property id="shade_color" type="number">0</property>
+        <property id="hour_color" type="number">0</property>
+        <property id="minute_color" type="number">0</property>
+        <property id="second_color" type="number">0</property>
         <property id="minute_change_color" type="number">1</property>
         <property id="arc_type" type="number">0</property>
         <property id="arc_color" type="number">0</property>
@@ -80,6 +83,57 @@
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             	<listEntry value="12">@Strings.color_yellow</listEntry>
             	<listEntry value="13">@Strings.color_random</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.hour_color" title="@Strings.hour_color_title" prompt="@Strings.hour_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.minute_color" title="@Strings.minute_color_title" prompt="@Strings.minute_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.second_color" title="@Strings.second_color_title" prompt="@Strings.second_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
             </settingConfig>
         </setting>        
         <setting propertyKey="@Properties.minute_change_color" title="@Strings.minute_change_color_title" prompt="@Strings.minute_change_color_title">

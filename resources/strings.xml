@@ -13,6 +13,9 @@
     <string id="heart_rate">Heart rate (Fenix 3 HR)</string>
     <string id="sunset_sunrise">Sunset/Sunrise</string>
     <string id="shade_color_title">Shade color</string>
+    <string id="hour_color_title">Hour color</string>
+    <string id="minute_color_title">Minute color</string>
+    <string id="second_color_title">Second color</string>
     <string id="bgk_color_title">Background color</string>
     <string id="color_default">Default</string>
     <string id="color_blue">Blue</string>
