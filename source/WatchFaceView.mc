@@ -21,6 +21,7 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var start_x_active_hour_10;
 	hidden var start_x_sleep_hour_10;
 	hidden var text_color;
+	hidden var shade_color;
 	hidden var calorie_icon_white;
 	hidden var calorie_icon_black;
 	hidden var step_icon_white;
@@ -121,7 +122,7 @@ class WatchFaceView extends Ui.WatchFace{
 		}
     	//hr
 		if(info_top == 6 || info_bottom == 7){
-			if(ActivityMonitor has HeartRateIterator) {
+			if(ActivityMonitor has :HeartRateIterator) {
     			var hrIter = ActivityMonitor.getHeartRateHistory(null, true);
         		if(hrIter != null){
         			var hr = hrIter.next();
@@ -163,10 +164,10 @@ class WatchFaceView extends Ui.WatchFace{
     		text_color=Gfx.COLOR_BLACK;
     	}
     	
-    	var shade_color = getColorShade(moment);
+    	shade_color = getColorShade(moment);
         dc.clear();
 		
-        drawHour(dc,info_date,shade_color,info_bottom,active&&display_second);
+        drawHour(dc,info_date,info_bottom,active&&display_second);
     
 		var y;
 		if(info_top == 0){
@@ -326,7 +327,7 @@ class WatchFaceView extends Ui.WatchFace{
        	      	
     }
             
-    function drawHour(dc,info_date,shade_color,info_bottom,display_second){
+    function drawHour(dc,info_date,info_bottom,display_second){
         var text_y_hour;
         if(info_bottom==0){
         	text_y_hour = cy-12;
@@ -341,7 +342,12 @@ class WatchFaceView extends Ui.WatchFace{
         	}else{
         		start_x=start_x_sleep_hour_10;
         	}
-		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[text_color,shade_color], display_second);	 
+        
+        var hour_color = getColorHour();
+        var minute_color = getColorMinute();
+        var second_color = getColorSecond();
+        	
+		Date.drawHour(dc,info_date,start_x,text_y_hour,[text_width_hour,text_width_point,text_width_minute],[text_height_hour,text_height_second],settings.is24Hour,[hour_color,text_color,minute_color,second_color], display_second);	 
     }
     
     function getColorShade(moment){
@@ -349,7 +355,7 @@ class WatchFaceView extends Ui.WatchFace{
         if(shade_color == 13){
         	var minute_change_color =  App.getApp().getProperty("minute_change_color");
         	var duration = new Time.Duration.initialize(minute_change_color*60);
-       		if(time_color == null || moment.greaterThan(time_color.add(duration))){
+       		if(time_color == null || moment.compare(time_color.add(duration))>=0){
         		var color = Math.rand()%11+1;
         		while(color == change_color){
         			color = Math.rand()%11+1;
@@ -389,6 +395,96 @@ class WatchFaceView extends Ui.WatchFace{
         return Gfx.COLOR_DK_RED;
     }
     
+    function getColorHour(){
+        var arc_color =  App.getApp().getProperty("hour_color");
+        if (arc_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (arc_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (arc_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (arc_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (arc_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (arc_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (arc_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (arc_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (arc_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (arc_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (arc_color == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return text_color;
+    }
+ 
+    function getColorMinute(){
+        var arc_color =  App.getApp().getProperty("minute_color");
+        if (arc_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (arc_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (arc_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (arc_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (arc_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (arc_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (arc_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (arc_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (arc_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (arc_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (arc_color == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return shade_color;
+    }
+        
+    function getColorSecond(){
+        var arc_color =  App.getApp().getProperty("second_color");
+        if (arc_color == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (arc_color == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (arc_color == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (arc_color == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (arc_color == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (arc_color == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (arc_color == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (arc_color == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (arc_color == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (arc_color == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (arc_color == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (arc_color == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return text_color;
+    }
+            
     function getBackgroundColor(){
         var bgk_color =  App.getApp().getProperty("bgk_color");
         if(bgk_color == 0){

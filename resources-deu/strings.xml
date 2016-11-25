@@ -13,6 +13,9 @@
     <string id="heart_rate">Herzfrequenz (Fenix 3 HR)</string>
     <string id="sunset_sunrise">Sonnenunter-/Sonnenaufgang</string>
     <string id="shade_color_title">Farbton</string>
+    <string id="hour_color_title">Farbe Zeit</string>
+    <string id="minute_color_title">Farbe Minuten</string>
+    <string id="second_color_title">Zweite Farbe</string>
     <string id="bgk_color_title">Hintergrundfarbe</string>
 	<string id="color_default">Standard</string>
     <string id="color_blue">blau</string>
@@ -32,6 +35,7 @@
     <string id="color_random">zufällig</string>
     <string id="minute_change_color_title">Zeit der Farbänderung in Minuten</string>
     <string id="arc_type_title">Bogentyp</string>
+    <string id="arc_color_goal_title">Farbe voll Bogen</string>
     <string id="arc_color_title">Bogenfarbe</string>
     <string id="arc_width_title">Bogendicke</string>
 	<string id="activity">Aktivität</string>
