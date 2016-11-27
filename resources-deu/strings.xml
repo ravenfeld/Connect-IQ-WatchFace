@@ -33,6 +33,7 @@
     <string id="color_black">schwarz</string>
     <string id="color_yellow">gelb</string>
     <string id="color_random">zufällig</string>
+    <string id="text_color">TextFarbe</string>
     <string id="minute_change_color_title">Zeit der Farbänderung in Minuten</string>
     <string id="arc_type_title">Bogentyp</string>
     <string id="arc_color_goal_title">Farbe voll Bogen</string>

@@ -100,6 +100,8 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.minute_color" title="@Strings.minute_color_title" prompt="@Strings.minute_color_title">
@@ -117,6 +119,8 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
             </settingConfig>
         </setting>
         <setting propertyKey="@Properties.second_color" title="@Strings.second_color_title" prompt="@Strings.second_color_title">
@@ -134,6 +138,8 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
             </settingConfig>
         </setting>        
         <setting propertyKey="@Properties.minute_change_color" title="@Strings.minute_change_color_title" prompt="@Strings.minute_change_color_title">
