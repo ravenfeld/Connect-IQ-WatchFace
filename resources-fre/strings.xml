@@ -33,6 +33,7 @@
     <string id="color_black">Noir</string>
     <string id="color_yellow">Jaune</string>
     <string id="color_random">Aléatoire</string>
+    <string id="text_color">Couleur du texte</string>
     <string id="minute_change_color_title">Nombre de minute entre le changement de la nuance</string>
     <string id="arc_type_title">Type arc</string>
     <string id="arc_color_title">Couleur de l'arc</string>
