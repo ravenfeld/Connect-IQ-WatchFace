@@ -367,134 +367,19 @@ class WatchFaceView extends Ui.WatchFace{
         		shade_color = change_color;
         	}
         }
-		if (shade_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (shade_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (shade_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (shade_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (shade_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (shade_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (shade_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (shade_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (shade_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (shade_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (shade_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (shade_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }
-        return Gfx.COLOR_DK_RED;
+        return getColor(shad_color,Gfx.COLOR_DK_RED);
     }
     
     function getColorHour(){
-        var hour_color =  App.getApp().getProperty("hour_color");
-        if (hour_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (hour_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (hour_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (hour_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (hour_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (hour_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (hour_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (hour_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (hour_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (hour_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (hour_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (hour_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }else if (hour_color == 13) {
-        	return shade_color;
-        }else if (hour_color == 14) {
-        	return text_color;
-        }
-        return text_color;
+        return getColor(App.getApp().getProperty("hour_color"),text_color);
     }
  
     function getColorMinute(){
-        var minute_color =  App.getApp().getProperty("minute_color");
-        if (minute_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (minute_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (minute_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (minute_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (minute_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (minute_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (minute_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (minute_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (minute_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (minute_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (minute_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (minute_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }else if (minute_color == 13) {
-        	return shade_color;
-        }else if (minute_color == 14) {
-        	return text_color;
-        }
-        return shade_color;
+        return getColor(App.getApp().getProperty("minute_color"),shade_color);
     }
         
     function getColorSecond(){
-        var second_color =  App.getApp().getProperty("second_color");
-        if (second_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (second_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (second_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (second_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (second_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (second_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (second_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (second_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (second_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (second_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (second_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (second_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }else if (second_color == 13) {
-        	return shade_color;
-        }else if (second_color == 14) {
-        	return text_color;
-        }
-        return text_color;
+        return getColor(App.getApp().getProperty("second_color"),text_color);
     }
             
     function getBackgroundColor(){
@@ -507,65 +392,42 @@ class WatchFaceView extends Ui.WatchFace{
     }
         
     function getColorArc(){
-        var arc_color =  App.getApp().getProperty("arc_color");
-        if (arc_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (arc_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (arc_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (arc_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (arc_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (arc_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (arc_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (arc_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (arc_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (arc_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (arc_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (arc_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }
-        return text_color;
+        return getColor(App.getApp().getProperty("arc_color"),text_color);
     }
     
     function getColorArcGoal(){
-        var arc_color =  App.getApp().getProperty("arc_color_goal");
-        if (arc_color == 1) {
-        	return Gfx.COLOR_BLUE;
-        }else if (arc_color == 2) {
-        	return Gfx.COLOR_DK_BLUE;
-        }else if (arc_color == 3) {
-        	return Gfx.COLOR_GREEN;
-        }else if (arc_color == 4) {
-        	return Gfx.COLOR_DK_GREEN;
-        }else if (arc_color == 5) {
-        	return Gfx.COLOR_LT_GRAY;
-        }else if (arc_color == 6) {
-        	return Gfx.COLOR_DK_GRAY;
-        }else if (arc_color == 7) {
-        	return Gfx.COLOR_ORANGE;
-        }else if (arc_color == 8) {
-        	return Gfx.COLOR_PINK;
-        }else if (arc_color == 9) {
-        	return Gfx.COLOR_PURPLE;
-        }else if (arc_color == 10) {
-        	return Gfx.COLOR_RED;
-        }else if (arc_color == 11) {
-        	return Gfx.COLOR_DK_RED;
-        }else if (arc_color == 12) {
-        	return Gfx.COLOR_YELLOW;
-        }
-        return Gfx.COLOR_GREEN;
+        return getColor(App.getApp().getProperty("arc_color_goal"),Gfx.COLOR_GREEN);
     }
     
+   	function getColor(color_property, color_default){
+        if (color_property == 1) {
+        	return Gfx.COLOR_BLUE;
+        }else if (color_property == 2) {
+        	return Gfx.COLOR_DK_BLUE;
+        }else if (color_property == 3) {
+        	return Gfx.COLOR_GREEN;
+        }else if (color_property == 4) {
+        	return Gfx.COLOR_DK_GREEN;
+        }else if (color_property == 5) {
+        	return Gfx.COLOR_LT_GRAY;
+        }else if (color_property == 6) {
+        	return Gfx.COLOR_DK_GRAY;
+        }else if (color_property == 7) {
+        	return Gfx.COLOR_ORANGE;
+        }else if (color_property == 8) {
+        	return Gfx.COLOR_PINK;
+        }else if (color_property == 9) {
+        	return Gfx.COLOR_PURPLE;
+        }else if (color_property == 10) {
+        	return Gfx.COLOR_RED;
+        }else if (color_property == 11) {
+        	return Gfx.COLOR_DK_RED;
+        }else if (color_property == 12) {
+        	return Gfx.COLOR_YELLOW;
+        }
+        return color_default;
+    } 
+     
     function getMoment(now,what) {
 		return SunCalc.calculate(now, lastLoc[0], lastLoc[1], what);
 	}
