@@ -367,7 +367,7 @@ class WatchFaceView extends Ui.WatchFace{
         		shade_color = change_color;
         	}
         }
-        return getColor(shad_color,Gfx.COLOR_DK_RED);
+        return getColor(shade_color,Gfx.COLOR_DK_RED);
     }
     
     function getColorHour(){
