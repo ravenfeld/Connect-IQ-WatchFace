@@ -171,16 +171,16 @@ class WatchFaceView extends Ui.WatchFace{
     
 		var y;
 		if(info_top == 0){
-			y = cy-text_height_hour/2-27;
+			y = cy/2-27;
 			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
 		}else if( info_top == 1){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);
 		}else if (info_top == 2 && settings.phoneConnected){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			PhoneConnected.drawIcon(dc,cx,y,text_color);
 		}else if(info_top == 3){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			var calorie_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				calorie_icon = calorie_icon_white;
@@ -189,7 +189,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 			Utils.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}else if(info_top == 4){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			var step_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				step_icon = step_icon_white;
@@ -198,7 +198,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 			Utils.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}else if(info_top == 5){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			var distance_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				distance_icon = distance_icon_white;
@@ -208,7 +208,7 @@ class WatchFaceView extends Ui.WatchFace{
 		
 			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
 		}else if(info_top == 6){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			var heart_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				heart_icon = heart_icon_white;
@@ -218,7 +218,7 @@ class WatchFaceView extends Ui.WatchFace{
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
 		}else if(info_top == 7){
-			y = cy-text_height_hour/2-15;
+			y = cy/2-15;
 			var sun_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				if(sunset){
@@ -247,16 +247,16 @@ class WatchFaceView extends Ui.WatchFace{
 			var x = 40;
        		Altimeter.draw(dc,altitude,x,y,text_color,text_color,shade_color);	
 		}else if( info_bottom == 1){
-			y = cy+text_height_hour/2;
+			y = cy+cy/2;
 			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
 		}else if(info_bottom ==2){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2 + 20;
 			Battery.drawIcon(dc,battery,battery_low,cx,y,text_color,battery_percentage);	
 		}else if (info_bottom == 3 && settings.phoneConnected){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2 + 20;
 			PhoneConnected.drawIcon(dc,cx,y,text_color);
 		}else if(info_bottom == 4){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2 + 20;
 			var calorie_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				calorie_icon = calorie_icon_white;
@@ -265,7 +265,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 			Utils.drawIconText(dc,ActivityMonitor.getInfo().calories,cx,y,text_color,calorie_icon);
 		}else if(info_bottom == 5){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2+20;
 			var step_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				step_icon = step_icon_white;
@@ -274,7 +274,7 @@ class WatchFaceView extends Ui.WatchFace{
 			}
 			Utils.drawIconText(dc,ActivityMonitor.getInfo().steps,cx,y,text_color,step_icon);
 		}else if(info_bottom == 6){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2+20;
 			var distance_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				distance_icon = distance_icon_white;
@@ -284,7 +284,7 @@ class WatchFaceView extends Ui.WatchFace{
 			
 			InfoMonitor.drawIconDistance(dc,ActivityMonitor.getInfo().distance,cx,y,text_color,distance_icon);
 		}else if(info_bottom == 7){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2+20;
 			var heart_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				heart_icon = heart_icon_white;
@@ -294,7 +294,7 @@ class WatchFaceView extends Ui.WatchFace{
 		
 			Utils.drawIconText(dc,heart_rate,cx,y,text_color,heart_icon);
 		}else if(info_bottom == 8){
-			y = cy+text_height_hour/2+20;
+			y = cy+cy/2+20;
 			var sun_icon;
 			if(bgk_color==Gfx.COLOR_BLACK){
 				if(sunset){
