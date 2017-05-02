@@ -13,20 +13,10 @@ module Date{
         	}
         }
         
-        var hourString;
-        if (hour < 10) {
-            hourString = Lang.format("0$1$", [hour]);   
-        } else {
-            hourString = Lang.format("$1$", [hour]);
-        }
+        var hourString = hour.format("%02d"); 
         
-        var minuteString;
-        if (date.min >= 10) {
-            minuteString = Lang.format("$1$", [date.min.format("%d")]);
-        } else {
-            minuteString = Lang.format("0$1$", [date.min.format("%d")]);
-        }
-                       
+        var minuteString = date.min.format("%02d");
+           
         dc.setColor(color[0], Gfx.COLOR_TRANSPARENT);
         dc.drawText(start_x, cy, Gfx.FONT_NUMBER_THAI_HOT, hourString, Gfx.TEXT_JUSTIFY_VCENTER | Gfx.TEXT_JUSTIFY_LEFT);
         
@@ -40,12 +30,7 @@ module Date{
         
         
         if(display_second){
-            var secondString;
-        	if (date.sec >= 10) {
-            	secondString = Lang.format("$1$", [date.sec.format("%d")]);
-        	} else {
-            	secondString = Lang.format("0$1$", [date.sec.format("%d")]);
-        	}
+            var secondString = date.sec.format("%02d");
         	var start_second=start_minute+text_width[2]+4;
         	dc.setColor(color[3], Gfx.COLOR_TRANSPARENT);
         	dc.drawText(start_second, cy-text_height[0]/2+text_height[1]/2+12, Gfx.FONT_NUMBER_MEDIUM, secondString, Gfx.TEXT_JUSTIFY_VCENTER |Gfx.TEXT_JUSTIFY_LEFT);
