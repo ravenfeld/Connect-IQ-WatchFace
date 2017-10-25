@@ -1,0 +1,164 @@
+<resources>
+
+    <properties>
+        <property id="second_display" type="boolean">true</property>
+        <property id="info_top" type="number">0</property>
+        <property id="info_bottom" type="number">0</property>
+        <property id="date_type" type="number">0</property>
+        <property id="bgk_color" type="number">0</property>
+        <property id="shade_color" type="number">0</property>
+        <property id="hour_color" type="number">0</property>
+        <property id="minute_color" type="number">0</property>
+        <property id="second_color" type="number">0</property>
+        <property id="minute_change_color" type="number">1</property>
+        <property id="arc_type" type="number">3</property>
+        <property id="arc_color" type="number">0</property>
+        <property id="arc_color_goal" type="number">0</property>
+        <property id="arc_width" type="number">4</property>
+        <property id="battery_low" type="number">15</property>
+        <property id="battery_percentage" type="boolean">false</property>
+        <property id="battery_profile" type="boolean">false</property>
+        <property id="altitude_profile" type="boolean">false</property>
+        <property id="altitude_step" type="number">1000</property>
+    </properties>
+
+
+    <settings>
+        <setting propertyKey="@Properties.second_display" title="@Strings.second_display_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.info_top" title="@Strings.info_top_title" prompt="@Strings.info_top_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.date</listEntry>
+            	<listEntry value="1">@Strings.battery</listEntry>
+            	<listEntry value="2">@Strings.phone_connected</listEntry>
+            	<listEntry value="3">@Strings.calorie</listEntry>
+            	<listEntry value="4">@Strings.step</listEntry>
+            	<listEntry value="5">@Strings.distance</listEntry>
+            	<listEntry value="6">@Strings.heart_rate</listEntry>
+            	<listEntry value="7">@Strings.sunset_sunrise</listEntry>
+            	<listEntry value="8">@Strings.none</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.info_bottom" title="@Strings.info_bottom_title" prompt="@Strings.info_bottom_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.altimeter</listEntry>
+            	<listEntry value="1">@Strings.date</listEntry>
+            	<listEntry value="2">@Strings.battery</listEntry>
+            	<listEntry value="3">@Strings.phone_connected</listEntry>
+            	<listEntry value="4">@Strings.calorie</listEntry>
+            	<listEntry value="5">@Strings.step</listEntry>
+            	<listEntry value="6">@Strings.distance</listEntry>
+            	<listEntry value="7">@Strings.heart_rate</listEntry>
+            	<listEntry value="8">@Strings.sunset_sunrise</listEntry>
+            	<listEntry value="9">@Strings.none</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.date_type" title="@Strings.date_type_title">
+            <settingConfig type="list">
+            	<listEntry value="0">@Strings.date_type_day</listEntry>
+            	<listEntry value="1">@Strings.date_type_day_month</listEntry>
+            	<listEntry value="2">@Strings.date_type_month</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.bgk_color" title="@Strings.bgk_color_title" prompt="@Strings.bgk_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_black</listEntry>
+            	<listEntry value="1">@Strings.color_white</listEntry>
+            </settingConfig>
+        </setting> 
+        <setting propertyKey="@Properties.shade_color" title="@Strings.shade_color_title" prompt="@Strings.shade_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.color_random</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.hour_color" title="@Strings.hour_color_title" prompt="@Strings.hour_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.minute_color" title="@Strings.minute_color_title" prompt="@Strings.minute_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.second_color" title="@Strings.second_color_title" prompt="@Strings.second_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            	<listEntry value="12">@Strings.color_yellow</listEntry>
+            	<listEntry value="13">@Strings.shade_color_title</listEntry>
+            	<listEntry value="14">@Strings.text_color</listEntry>
+            </settingConfig>
+        </setting>        
+        <setting propertyKey="@Properties.minute_change_color" title="@Strings.minute_change_color_title" prompt="@Strings.minute_change_color_title">
+            <settingConfig type="numeric" min="1" max="1440" />
+        </setting>       
+         <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
+            <settingConfig type="numeric" min="0" max="100" />
+        </setting>
+        <setting propertyKey="@Properties.battery_percentage" title="@Strings.battery_percentage_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.battery_profile" title="@Strings.battery_profile_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.altitude_profile" title="@Strings.altitude_profile_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.altitude_step" title="@Strings.altitude_step_title" prompt="@Strings.altitude_step_title">
+            <settingConfig type="numeric" min="0" max="10000" />
+        </setting>  
+    </settings>
+</resources>

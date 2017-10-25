@@ -22,7 +22,7 @@ enum {
 
 module SunCalc {
 
-	hidden const PI   = Math.PI,
+	const PI   = Math.PI,
 		RAD  = Math.PI / 180.0,
 		PI2  = Math.PI * 2.0,
 		DAYS = Time.Gregorian.SECONDS_PER_DAY,
@@ -30,7 +30,7 @@ module SunCalc {
 		J2000 = 2451545,
 		J0 = 0.0009;
 
-	hidden const TIMES = [
+	const TIMES = [
 		-18 * RAD,
 		-12 * RAD,
 		-6 * RAD,
