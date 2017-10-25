@@ -115,7 +115,7 @@ class WatchFaceView extends Ui.WatchFace{
         
 		if (actInfo != null && actInfo.altitude != null) {
 			altitude = actInfo.altitude;
-			var metric = Sys.getDeviceSettings().elevationUnits;
+			var metric = settings.elevationUnits;
 			if (metric==Sys.UNIT_STATUTE) {
 				altitude = altitude*3.38;
 			}				
@@ -239,13 +239,14 @@ class WatchFaceView extends Ui.WatchFace{
 				
 		
 		if(info_bottom == 0){
-			if(arc_type==3){
-				y = 192;
+			
+			if(settings.screenShape==Sys.SCREEN_SHAPE_SEMI_ROUND){
+				y=dc.getHeight()-10;
 			}else{
-				y = 185;
+				y=dc.getHeight()*0.85;
 			}
-			var x = 40;
-       		Altimeter.draw(dc,altitude,x,y,text_color,text_color,shade_color);	
+			
+       		Altimeter.draw(dc,altitude,y,text_color,text_color,shade_color);	
 		}else if( info_bottom == 1){
 			y = cy+cy/2;
 			Date.drawDate(dc,info_date,cx,y,text_color,date_type);
