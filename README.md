@@ -1,10 +1,10 @@
 # Connect-IQ-WatchFace
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/0.png)
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/1.png)
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/2.png)
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/3.png)
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/4.png)
-![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/dev/screenshot/5.jpg)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/0.png)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/1.png)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/2.png)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/3.png)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/4.png)
+![0](https://github.com/ravenfeld/Connect-IQ-WatchFace/blob/develop/screenshot/5.jpg)
 
 # Link
 [Mountain Face](https://apps.garmin.com/fr-FR/apps/eb4dcb36-fd5d-4948-901b-a178db08677b)
