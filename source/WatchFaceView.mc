@@ -32,6 +32,8 @@ class WatchFaceView extends Ui.WatchFace{
 	hidden var heart_icon_black;
 	hidden var sunrise_icon_white;
 	hidden var sunrise_icon_black;
+	hidden var alarm_icon_white;
+	hidden var alarm_icon_black;
 	hidden var change_color;
 	hidden var time_color;
 	hidden var altitude = 0;
@@ -69,6 +71,10 @@ class WatchFaceView extends Ui.WatchFace{
     	    	
     	sunrise_icon_white = Ui.loadResource(Rez.Drawables.SunriseIconWhite);
     	sunrise_icon_black = Ui.loadResource(Rez.Drawables.SunriseIconBlack);
+    	
+    	alarm_icon_white = Ui.loadResource(Rez.Drawables.AlarmIconWhite);
+    	alarm_icon_black = Ui.loadResource(Rez.Drawables.AlarmIconBlack);
+    	
     }
     
     function onHide(){
@@ -314,9 +320,9 @@ class WatchFaceView extends Ui.WatchFace{
 			Utils.drawIconText(dc,sunset_sunrise,cx,y,text_color,sun_icon);
 		}
 		
+		var arc_width =  App.getApp().getProperty("arc_width");
 		if(arc_type<3){
-       		var arc_width =  App.getApp().getProperty("arc_width");
-      
+       		
        		if(arc_type == 0){
        			Battery.drawArc(dc,battery,battery_low,cx,cy,getColorArc(),arc_width);
        		}else if (arc_type == 1) {
@@ -325,6 +331,19 @@ class WatchFaceView extends Ui.WatchFace{
         		InfoMonitor.drawArcMoveBar(dc,ActivityMonitor.getInfo().moveBarLevel,ActivityMonitor.MOVE_BAR_LEVEL_MAX,cx,cy,getColorArc(),arc_width);
         	} 	
        	} 
+       	
+       	var alarm_count = settings.alarmCount;
+       	var alarm =  App.getApp().getProperty("alarm_clock_display");
+       	
+       	if ( alarm_count > 0 && alarm) {
+       		var alarm_clock_icon;
+			if(bgk_color==Gfx.COLOR_BLACK){
+				alarm_clock_icon = alarm_icon_white;
+			}else{
+				alarm_clock_icon = alarm_icon_black;
+			}
+       		dc.drawBitmap(cx*2-32-arc_width/2-alarm_clock_icon.getWidth()/2,cy/2-alarm_clock_icon.getHeight()/2,alarm_clock_icon);
+       	}
        	      	
     }
             

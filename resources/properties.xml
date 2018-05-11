@@ -20,6 +20,7 @@
         <property id="battery_profile" type="boolean">false</property>
         <property id="altitude_profile" type="boolean">false</property>
         <property id="altitude_step" type="number">1000</property>
+        <property id="alarm_clock_display" type="boolean">true</property>
     </properties>
 
 
@@ -205,5 +206,8 @@
         <setting propertyKey="@Properties.altitude_step" title="@Strings.altitude_step_title" prompt="@Strings.altitude_step_title">
             <settingConfig type="numeric" min="0" max="10000" />
         </setting>  
+        <setting propertyKey="@Properties.alarm_clock_display" title="@Strings.alarm_clock_display_title">
+            <settingConfig type="boolean" />
+        </setting>        
     </settings>
 </resources>

@@ -50,4 +50,5 @@
 	<string id="battery_profile_title">Batterie bei geringer Ladung anzeigen</string>
 	<string id="altitude_profile_title">Höhenanzeige, bei Überschreitung des Schwellenwerts</string>
 	<string id="altitude_step_title">Höhenschwellwert</string>
+	<string id="alarm_clock_display_title">Alarmanzeige</string>
 </strings>
