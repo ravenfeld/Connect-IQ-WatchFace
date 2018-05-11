@@ -50,4 +50,5 @@
 	<string id="battery_profile_title">Display battery if low battery</string>
 	<string id="altitude_profile_title">Display altitude if the step is exceeded</string>
 	<string id="altitude_step_title">Altitude step</string>
+	<string id="alarm_clock_display_title">Display alarm clock</string>
 </resources>

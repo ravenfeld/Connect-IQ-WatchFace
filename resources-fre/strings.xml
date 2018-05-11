@@ -50,4 +50,5 @@
 	<string id="battery_profile_title">Affichage de la batterie si la batterie est faible</string>
 	<string id="altitude_profile_title">Affichage de l'altitude si le seuil est dépassé</string>
 	<string id="altitude_step_title">Seuil d'altitude</string>
+	<string id="alarm_clock_display_title">Affichage de réveil</string>
 </strings>
